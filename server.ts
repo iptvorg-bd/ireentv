@@ -349,7 +349,7 @@ async function fetchPlaylistFromRemote(): Promise<any> {
 
 function slugifyName(str: string): string {
   if (!str) return "";
-  return str.trim().replace(/[^\w]/g, "").toLowerCase();
+  return str.toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
 function cleanSlugName(name: string): string {
@@ -358,21 +358,49 @@ function cleanSlugName(name: string): string {
 }
 
 function findMatchingChannelInList(channels: any[], query: string): any | null {
-  if (!channels || !query) return null;
+  if (!channels || !Array.isArray(channels) || channels.length === 0 || !query) return null;
   const clean = query.replace(/\.m3u8?$/i, "").trim();
-  
-  // Exact match
-  const exact = channels.find(c => c.name.trim().toLowerCase() === clean.toLowerCase());
+  if (!clean) return null;
+
+  // 1. Exact case-insensitive match
+  const exact = channels.find(c => (c.name || "").trim().toLowerCase() === clean.toLowerCase());
   if (exact) return exact;
 
-  // Slug match
+  // 2. Exact slug match
   const qSlug = slugifyName(clean);
-  const slugMatch = channels.find(c => slugifyName(c.name) === qSlug);
-  if (slugMatch) return slugMatch;
+  if (qSlug.length > 0) {
+    const slugMatch = channels.find(c => slugifyName(c.name || "") === qSlug);
+    if (slugMatch) return slugMatch;
+  }
 
-  // Partial match
-  const partial = channels.find(c => slugifyName(c.name).includes(qSlug) || qSlug.includes(slugifyName(c.name)));
-  if (partial) return partial;
+  // 3. Match by tvg_id
+  if (qSlug.length > 0) {
+    const tvgMatch = channels.find(c => {
+      if (!c.tvg_id) return false;
+      return slugifyName(c.tvg_id) === qSlug;
+    });
+    if (tvgMatch) return tvgMatch;
+  }
+
+  // 4. Prefix match only if length >= 3
+  if (qSlug.length >= 3) {
+    const prefixMatch = channels.find(c => {
+      const s = slugifyName(c.name || "");
+      if (s.length < 3) return false;
+      return s.startsWith(qSlug) || qSlug.startsWith(s);
+    });
+    if (prefixMatch) return prefixMatch;
+  }
+
+  // 5. Partial match only if both have at least 4 characters
+  if (qSlug.length >= 4) {
+    const partial = channels.find(c => {
+      const s = slugifyName(c.name || "");
+      if (s.length < 4) return false;
+      return s.includes(qSlug) || qSlug.includes(s);
+    });
+    if (partial) return partial;
+  }
 
   return null;
 }

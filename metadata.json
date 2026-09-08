@@ -1,0 +1,6 @@
+{
+  "name": "IreenTV",
+  "description": "IreenTV - একটি আধুনিক এবং দৃষ্টিনন্দন লাইভ টিভি ওয়েবসাইট যা অটো-আপডেটেড চ্যানেল প্লেলিস্ট সমর্থন করে।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

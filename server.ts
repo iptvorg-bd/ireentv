@@ -83,35 +83,6 @@ function normalizeChannel(raw: any, index: number = 0): any {
   };
 }
 
-function normalizePlaylistData(raw: any): any {
-  if (!raw) return { channels: [] };
-  let rawChannels: any[] = [];
-  if (Array.isArray(raw.channels)) {
-    rawChannels = raw.channels;
-  } else if (Array.isArray(raw)) {
-    rawChannels = raw;
-  }
-
-  const channels = rawChannels.map((c, i) => normalizeChannel(c, i));
-  const info = raw.info || {};
-
-  return {
-    status: raw.status || "success",
-    name: raw.name || info.playlist_name || raw.playlist_name || "Live Sports",
-    playlist_name: raw.playlist_name || info.playlist_name || raw.name || "Live Sports",
-    owner: raw.owner || info.owner || "IreenTv",
-    telegram: raw.telegram || info.telegram || "https://t.me/ireentv",
-    website: raw.website || info.website || "https://ireentv.pages.dev",
-    developer: raw.developer || info.developer || "MD ANAMUL HOQUE",
-    version: raw.version || info.version || "1.0",
-    channels_amount: raw.channels_amount || info.channels_amount || channels.length,
-    Last_update: raw.Last_update || raw.last_update || info.last_update || "Just Now",
-    last_update: raw.last_update || raw.Last_update || info.last_update || "Just Now",
-    info,
-    channels
-  };
-}
-
 function cleanUnicodeText(str: string): string {
   if (!str) return "";
   let res = "";
@@ -130,6 +101,89 @@ function cleanUnicodeText(str: string): string {
     }
   }
   return res;
+}
+
+function getBaseChannelName(rawName: string): string {
+  if (!rawName) return "Channel";
+  let s = cleanUnicodeText(rawName).trim();
+  // Strip quality tags like HD, SD, FHD, UHD, 4K, 2K, 720p, 1080p, HEVC, HQ
+  // e.g. "T Sports HD", "T Sports (HD)", "TSports [SD]", "Sony Max - HD"
+  s = s.replace(/[\s\-_]*[\[\(]?(FHD|UHD|HD|SD|4K|2K|720p|1080p|HEVC|HQ)[\]\)]?[\s\-_]*/gi, " ").trim();
+  s = s.replace(/\s+/g, " ");
+  return s || rawName.trim();
+}
+
+function normalizeKey(str: string): string {
+  return (str || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function deduplicateAndNumberChannels(list: any[]): any[] {
+  const groups = new Map<string, { baseName: string; items: Array<{ ch: any; index: number }> }>();
+
+  list.forEach((ch, index) => {
+    const origName = (ch.name || ch.title || "").trim();
+    const baseName = getBaseChannelName(origName);
+    const key = normalizeKey(baseName) || normalizeKey(origName) || `ch_${index}`;
+
+    if (!groups.has(key)) {
+      groups.set(key, { baseName, items: [] });
+    }
+    groups.get(key)!.items.push({ ch, index });
+  });
+
+  const result = [...list];
+
+  for (const [, group] of groups) {
+    const { baseName, items } = group;
+    if (items.length === 1) {
+      result[items[0].index] = {
+        ...items[0].ch,
+        name: baseName
+      };
+    } else {
+      const endsWithNumber = /\d+$/.test(baseName);
+      items.forEach((item, i) => {
+        const num = i + 1;
+        const numberedName = endsWithNumber ? `${baseName} - ${num}` : `${baseName} ${num}`;
+        result[item.index] = {
+          ...item.ch,
+          name: numberedName
+        };
+      });
+    }
+  }
+
+  return result;
+}
+
+function normalizePlaylistData(raw: any): any {
+  if (!raw) return { channels: [] };
+  let rawChannels: any[] = [];
+  if (Array.isArray(raw.channels)) {
+    rawChannels = raw.channels;
+  } else if (Array.isArray(raw)) {
+    rawChannels = raw;
+  }
+
+  let channels = rawChannels.map((c, i) => normalizeChannel(c, i));
+  channels = deduplicateAndNumberChannels(channels);
+  const info = raw.info || {};
+
+  return {
+    status: raw.status || "success",
+    name: raw.name || info.playlist_name || raw.playlist_name || "Live Sports",
+    playlist_name: raw.playlist_name || info.playlist_name || raw.name || "Live Sports",
+    owner: raw.owner || info.owner || "IreenTv",
+    telegram: raw.telegram || info.telegram || "https://t.me/ireentv",
+    website: raw.website || info.website || "https://ireentv.pages.dev",
+    developer: raw.developer || info.developer || "MD ANAMUL HOQUE",
+    version: raw.version || info.version || "1.0",
+    channels_amount: channels.length,
+    Last_update: raw.Last_update || raw.last_update || info.last_update || "Just Now",
+    last_update: raw.last_update || raw.Last_update || info.last_update || "Just Now",
+    info,
+    channels
+  };
 }
 
 function parseM3uToPlaylistData(m3uContent: string): any {
@@ -207,6 +261,8 @@ function parseM3uToPlaylistData(m3uContent: string): any {
     }
   }
 
+  const processedChannels = deduplicateAndNumberChannels(channels);
+
   return {
     status: "success",
     name: playlistName,
@@ -216,10 +272,10 @@ function parseM3uToPlaylistData(m3uContent: string): any {
     website: "https://ireentv.pages.dev",
     developer: "MD ANAMUL HOQUE",
     version: "2.0",
-    channels_amount: channels.length,
+    channels_amount: processedChannels.length,
     Last_update: lastUpdate,
     last_update: lastUpdate,
-    channels
+    channels: processedChannels
   };
 }
 
@@ -293,12 +349,12 @@ async function fetchPlaylistFromRemote(): Promise<any> {
 
 function slugifyName(str: string): string {
   if (!str) return "";
-  return str.trim().replace(/[^\w\s-]/g, "").replace(/[\s_]+/g, "").toLowerCase();
+  return str.trim().replace(/[^\w]/g, "").toLowerCase();
 }
 
 function cleanSlugName(name: string): string {
   if (!name) return "";
-  return name.trim().replace(/\s+/g, "_").replace(/[^\w\-]/g, "");
+  return name.trim().replace(/\s+/g, "_").replace(/[^\w\-]/g, "").replace(/-+/g, "_").replace(/_+/g, "_");
 }
 
 function findMatchingChannelInList(channels: any[], query: string): any | null {

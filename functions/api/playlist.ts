@@ -1,4 +1,69 @@
 // Cloudflare Pages Function: API Playlist
+function cleanUnicodeText(str: string): string {
+  if (!str) return "";
+  let res = "";
+  for (const char of str) {
+    const cp = char.codePointAt(0) || 0;
+    if (cp >= 0x1D400 && cp <= 0x1D419) res += String.fromCharCode(cp - 0x1D400 + 65);
+    else if (cp >= 0x1D41A && cp <= 0x1D433) res += String.fromCharCode(cp - 0x1D41A + 97);
+    else if (cp >= 0x1D5D4 && cp <= 0x1D5ED) res += String.fromCharCode(cp - 0x1D5D4 + 65);
+    else if (cp >= 0x1D5EE && cp <= 0x1D607) res += String.fromCharCode(cp - 0x1D5EE + 97);
+    else res += char;
+  }
+  return res;
+}
+
+function getBaseChannelName(rawName: string): string {
+  if (!rawName) return "Channel";
+  let s = cleanUnicodeText(rawName).trim();
+  s = s.replace(/[\s\-_]*[\[\(]?(FHD|UHD|HD|SD|4K|2K|720p|1080p|HEVC|HQ)[\]\)]?[\s\-_]*/gi, " ").trim();
+  s = s.replace(/\s+/g, " ");
+  return s || rawName.trim();
+}
+
+function normalizeKey(str: string): string {
+  return (str || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function deduplicateAndNumberChannels(list: any[]): any[] {
+  const groups = new Map<string, { baseName: string; items: Array<{ ch: any; index: number }> }>();
+
+  list.forEach((ch, index) => {
+    const origName = (ch.name || "").trim();
+    const baseName = getBaseChannelName(origName);
+    const key = normalizeKey(baseName) || normalizeKey(origName) || `ch_${index}`;
+
+    if (!groups.has(key)) {
+      groups.set(key, { baseName, items: [] });
+    }
+    groups.get(key)!.items.push({ ch, index });
+  });
+
+  const result = [...list];
+
+  for (const [, group] of groups) {
+    const { baseName, items } = group;
+    if (items.length === 1) {
+      result[items[0].index] = {
+        ...items[0].ch,
+        name: baseName
+      };
+    } else {
+      const endsWithNumber = /\d+$/.test(baseName);
+      items.forEach((item, i) => {
+        const num = i + 1;
+        const numberedName = endsWithNumber ? `${baseName} - ${num}` : `${baseName} ${num}`;
+        result[item.index] = {
+          ...item.ch,
+          name: numberedName
+        };
+      });
+    }
+  }
+
+  return result;
+}
+
 export const onRequest = async (context: any): Promise<Response> => {
   try {
     const githubSources = [
@@ -62,6 +127,7 @@ export const onRequest = async (context: any): Promise<Response> => {
             }
 
             if (channels.length > 0) {
+              const processedChannels = deduplicateAndNumberChannels(channels);
               playlistData = {
                 status: "success",
                 name: "IreenTV",
@@ -69,9 +135,9 @@ export const onRequest = async (context: any): Promise<Response> => {
                 owner: "IreenTV",
                 website: "https://ireentv.pages.dev",
                 telegram: "https://t.me/ireentv",
-                channels_amount: channels.length,
+                channels_amount: processedChannels.length,
                 last_update: lastUpdate,
-                channels
+                channels: processedChannels
               };
               break;
             }

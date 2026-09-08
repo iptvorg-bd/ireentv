@@ -84,9 +84,59 @@ export function normalizeChannel(raw: any, index: number = 0): Channel {
 /**
  * Normalizes full JSON playlist data
  */
+export function getBaseChannelName(rawName: string): string {
+  if (!rawName) return "Channel";
+  let s = cleanUnicodeText(rawName).trim();
+  s = s.replace(/[\s\-_]*[\[\(]?(FHD|UHD|HD|SD|4K|2K|720p|1080p|HEVC|HQ)[\]\)]?[\s\-_]*/gi, " ").trim();
+  s = s.replace(/\s+/g, " ");
+  return s || rawName.trim();
+}
+
+export function normalizeKey(str: string): string {
+  return (str || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+export function deduplicateAndNumberChannels<T extends { name: string }>(list: T[]): T[] {
+  const groups = new Map<string, { baseName: string; items: Array<{ ch: T; index: number }> }>();
+
+  list.forEach((ch, index) => {
+    const origName = (ch.name || "").trim();
+    const baseName = getBaseChannelName(origName);
+    const key = normalizeKey(baseName) || normalizeKey(origName) || `ch_${index}`;
+
+    if (!groups.has(key)) {
+      groups.set(key, { baseName, items: [] });
+    }
+    groups.get(key)!.items.push({ ch, index });
+  });
+
+  const result = [...list];
+
+  for (const [, group] of groups) {
+    const { baseName, items } = group;
+    if (items.length === 1) {
+      result[items[0].index] = {
+        ...items[0].ch,
+        name: baseName
+      };
+    } else {
+      const endsWithNumber = /\d+$/.test(baseName);
+      items.forEach((item, i) => {
+        const num = i + 1;
+        const numberedName = endsWithNumber ? `${baseName} - ${num}` : `${baseName} ${num}`;
+        result[item.index] = {
+          ...item.ch,
+          name: numberedName
+        };
+      });
+    }
+  }
+
+  return result;
+}
+
 export function normalizePlaylistData(raw: any): PlaylistData {
   if (!raw) return { channels: [] };
-
   let rawChannels: any[] = [];
   if (Array.isArray(raw.channels)) {
     rawChannels = raw.channels;
@@ -94,7 +144,8 @@ export function normalizePlaylistData(raw: any): PlaylistData {
     rawChannels = raw;
   }
 
-  const channels: Channel[] = rawChannels.map((c, i) => normalizeChannel(c, i));
+  let channels: Channel[] = rawChannels.map((c, i) => normalizeChannel(c, i));
+  channels = deduplicateAndNumberChannels(channels);
   const info = raw.info || {};
 
   return {
@@ -106,7 +157,7 @@ export function normalizePlaylistData(raw: any): PlaylistData {
     website: raw.website || info.website || "https://ireentv.pages.dev",
     developer: raw.developer || info.developer || "MD ANAMUL HOQUE",
     version: raw.version || info.version || "1.0",
-    channels_amount: raw.channels_amount || info.channels_amount || channels.length,
+    channels_amount: channels.length,
     Last_update: raw.Last_update || raw.last_update || info.last_update || "Just Now",
     last_update: raw.last_update || raw.Last_update || info.last_update || "Just Now",
     info,
@@ -222,6 +273,8 @@ export function parseM3uToPlaylistData(m3uContent: string): PlaylistData {
     }
   }
 
+  const processedChannels = deduplicateAndNumberChannels(channels);
+
   return {
     status: "success",
     name: playlistName,
@@ -231,10 +284,10 @@ export function parseM3uToPlaylistData(m3uContent: string): PlaylistData {
     website: "https://ireentv.pages.dev",
     developer: "MD ANAMUL HOQUE",
     version: "2.0",
-    channels_amount: channels.length,
+    channels_amount: processedChannels.length,
     Last_update: lastUpdate,
     last_update: lastUpdate,
-    channels
+    channels: processedChannels
   };
 }
 

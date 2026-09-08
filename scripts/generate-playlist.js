@@ -32,6 +32,59 @@ function cleanUnicodeText(str) {
   return res;
 }
 
+export function getBaseChannelName(rawName) {
+  if (!rawName) return "Channel";
+  let s = cleanUnicodeText(rawName).trim();
+  // Strip quality tags like HD, SD, FHD, UHD, 4K, 2K, 720p, 1080p, HEVC, HQ
+  // e.g. "T Sports HD", "T Sports (HD)", "TSports [SD]", "Sony Max - HD"
+  s = s.replace(/[\s\-_]*[\[\(]?(FHD|UHD|HD|SD|4K|2K|720p|1080p|HEVC|HQ)[\]\)]?[\s\-_]*/gi, " ").trim();
+  s = s.replace(/\s+/g, " ");
+  return s || rawName.trim();
+}
+
+export function normalizeKey(str) {
+  return (str || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+export function deduplicateAndNumberChannels(list) {
+  const groups = new Map();
+
+  list.forEach((ch, index) => {
+    const origName = (ch.name || ch.title || "").trim();
+    const baseName = getBaseChannelName(origName);
+    const key = normalizeKey(baseName) || normalizeKey(origName) || `ch_${index}`;
+
+    if (!groups.has(key)) {
+      groups.set(key, { baseName, items: [] });
+    }
+    groups.get(key).items.push({ ch, index });
+  });
+
+  const result = [...list];
+
+  for (const [, group] of groups) {
+    const { baseName, items } = group;
+    if (items.length === 1) {
+      result[items[0].index] = {
+        ...items[0].ch,
+        name: baseName
+      };
+    } else {
+      const endsWithNumber = /\d+$/.test(baseName);
+      items.forEach((item, i) => {
+        const num = i + 1;
+        const numberedName = endsWithNumber ? `${baseName} - ${num}` : `${baseName} ${num}`;
+        result[item.index] = {
+          ...item.ch,
+          name: numberedName
+        };
+      });
+    }
+  }
+
+  return result;
+}
+
 async function run() {
   console.log("Fetching live channels playlist from working_playlist.m3u...");
   let channels = [];
@@ -114,6 +167,9 @@ async function run() {
     console.error("Error: Could not retrieve channels from any source.");
     process.exit(1);
   }
+
+  // Deduplicate and number channels with duplicate base names (e.g. T Sports 1, 2, 3...)
+  channels = deduplicateAndNumberChannels(channels);
 
   // Ensure directories exist
   const publicDir = path.join(process.cwd(), "public");

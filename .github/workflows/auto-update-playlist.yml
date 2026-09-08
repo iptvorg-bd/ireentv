@@ -18,14 +18,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      - name: Auto-Download and Update Channel Logos
-        run: node scripts/download-logos.js
 
       - name: Generate M3U / M3U8 Playlist
         run: node scripts/generate-playlist.js
@@ -36,10 +36,11 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add playlist.m3u public/playlist.m3u public/playlist.m3u8 custom_logos.json public/logos/
+          git add playlist.m3u public/playlist.m3u public/playlist.m3u8
           if git diff --staged --quiet; then
-            echo "No changes in playlist or logos. Nothing to commit."
+            echo "No changes in playlist. Nothing to commit."
           else
-            git commit -m "Auto-update dynamic M3U playlist & channel logos [skip ci]"
-            git push
+            git commit -m "Auto-update dynamic M3U playlist [skip ci]"
+            git push origin main || git push
           fi
+

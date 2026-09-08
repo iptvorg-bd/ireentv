@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { 
   Search, Tv, Globe, Languages, X, ExternalLink, Info, 
   Sparkles, Heart, ListFilter, Send, Share2, Star, Check, AlertCircle, RefreshCw, ArrowLeft,
-  Lock, KeyRound, ListVideo, Copy
+  Lock, KeyRound, ListVideo, Copy, Github, GitBranch, UploadCloud, CheckCircle2
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { Channel, PlaylistData, Language } from "./types";
@@ -26,6 +26,23 @@ export default function App() {
   const [showCreditsModal, setShowCreditsModal] = useState<boolean>(false);
   const [showM3uModal, setShowM3uModal] = useState<boolean>(false);
   const [copiedM3u, setCopiedM3u] = useState<string | null>(null);
+
+  // GitHub & Playlist Sync States
+  const [githubRepo, setGithubRepo] = useState<string>(() => {
+    return localStorage.getItem("ireentv_github_repo") || "Romancecity/channel-filter";
+  });
+  const [githubToken, setGithubToken] = useState<string>(() => {
+    return localStorage.getItem("ireentv_github_token") || "";
+  });
+  const [githubBranch, setGithubBranch] = useState<string>("main");
+  const [isSyncingGithub, setIsSyncingGithub] = useState<boolean>(false);
+  const [isRefreshingPlaylist, setIsRefreshingPlaylist] = useState<boolean>(false);
+  const [githubSyncResult, setGithubSyncResult] = useState<{
+    type: "success" | "error" | "warning";
+    message: string;
+    commitUrl?: string;
+  } | null>(null);
+  const [showGithubConfig, setShowGithubConfig] = useState<boolean>(false);
 
   // Synchronous check for embed mode directly on initialization (before any render)
   const [isEmbed, setIsEmbed] = useState<boolean>(() => {
@@ -209,6 +226,88 @@ export default function App() {
   useEffect(() => {
     fetchPlaylist();
   }, []);
+
+  // 1-Click Refresh Playlist from Remote Source & Server Cache
+  const handleRefreshPlaylist = async () => {
+    setIsRefreshingPlaylist(true);
+    setGithubSyncResult(null);
+    try {
+      const res = await fetch("/api/refresh-playlist", { method: "POST" });
+      const data = await res.json();
+      if (data.success) {
+        setGithubSyncResult({
+          type: "success",
+          message: `${lang === "bn" ? "প্লেলিস্ট সফলভাবে রিফ্রেশ হয়েছে! মোট চ্যানেল:" : "Playlist refreshed successfully! Total channels:"} ${data.channels_count}`
+        });
+        await fetchPlaylist();
+      } else {
+        setGithubSyncResult({
+          type: "error",
+          message: data.error || (lang === "bn" ? "প্লেলিস্ট রিফ্রেশ ব্যর্থ হয়েছে" : "Failed to refresh playlist")
+        });
+      }
+    } catch (e: any) {
+      setGithubSyncResult({
+        type: "error",
+        message: e.message || (lang === "bn" ? "সার্ভারের সাথে সংযোগ করা সম্ভব হয়নি" : "Network connection error")
+      });
+    } finally {
+      setIsRefreshingPlaylist(false);
+    }
+  };
+
+  // Direct Push / Update playlist.m3u to GitHub Repository
+  const handleGithubSync = async () => {
+    setIsSyncingGithub(true);
+    setGithubSyncResult(null);
+
+    // Save preferences
+    localStorage.setItem("ireentv_github_repo", githubRepo);
+    if (githubToken) {
+      localStorage.setItem("ireentv_github_token", githubToken);
+    }
+
+    try {
+      const res = await fetch("/api/sync-github", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: githubToken.trim(),
+          repo: githubRepo.trim(),
+          branch: githubBranch.trim(),
+          filePath: "playlist.m3u"
+        })
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setGithubSyncResult({
+          type: "success",
+          message: data.message || (lang === "bn" ? "সফলভাবে গিটহাবে playlist.m3u আপডেট হয়েছে!" : "Successfully updated playlist.m3u on GitHub!"),
+          commitUrl: data.commitUrl
+        });
+        await fetchPlaylist();
+      } else if (data.needToken) {
+        setGithubSyncResult({
+          type: "warning",
+          message: data.message || (lang === "bn" ? "ওয়েবসাইটে প্লেলিস্ট রিফ্রেশ সম্পন্ন হয়েছে! তবে গিটহাবে পুশ করতে একটি GitHub Personal Access Token (PAT) প্রয়োজন।" : "Website playlist updated, but a GitHub Personal Access Token (PAT) is required to push to GitHub.")
+        });
+        setShowGithubConfig(true);
+      } else {
+        setGithubSyncResult({
+          type: "error",
+          message: data.error || (lang === "bn" ? "গিটহাব আপডেট এরর হয়েছে" : "GitHub update failed")
+        });
+      }
+    } catch (e: any) {
+      setGithubSyncResult({
+        type: "error",
+        message: e.message || (lang === "bn" ? "গিটহাব রিকোয়েস্টে এরর হয়েছে" : "GitHub request failed")
+      });
+    } finally {
+      setIsSyncingGithub(false);
+    }
+  };
 
   // Handle Favorite Toggling
   const handleToggleFavorite = (channel: Channel) => {
@@ -442,14 +541,14 @@ export default function App() {
               </div>
             )}
 
-            {/* M3U Playlist URL Button */}
+            {/* M3U Playlist URL & GitHub Sync Button */}
             <button
               onClick={() => setShowM3uModal(true)}
-              title={lang === "bn" ? "M3U প্লেলিস্ট ও সরাসরি লিংক" : "M3U Playlist & Direct Stream Links"}
+              title={lang === "bn" ? "M3U প্লেলিস্ট ও গিটহাব সিঙ্ক" : "M3U Playlist & GitHub Sync"}
               className="px-3 py-1.5 bg-neutral-900 hover:bg-yellow-950/30 border border-neutral-800 hover:border-yellow-600/40 rounded-xl text-neutral-300 hover:text-yellow-400 text-xs font-bold transition-all flex items-center gap-1.5 active:scale-95 shadow-sm cursor-pointer"
             >
               <ListVideo className="w-3.5 h-3.5 text-yellow-500" />
-              <span>M3U8</span>
+              <span>{lang === "bn" ? "M3U ও সিঙ্ক" : "M3U & Sync"}</span>
             </button>
 
             {/* Quick Lock Button */}
@@ -970,6 +1069,157 @@ export default function App() {
                       ? "যেকোনো চ্যানেলের নামের সাথে .m3u8 যোগ করলেই (যেমন: /T_Sports_HD.m3u8, /BTV_National.m3u8) সরাসরি লাইভ স্ট্রিম চলবে।"
                       : "Access any live channel directly by appending .m3u8 to its name (e.g. /T_Sports_HD.m3u8)."}
                   </p>
+                </div>
+
+                {/* GitHub Playlist Sync & Update Section */}
+                <div className="p-4 bg-neutral-950 border border-neutral-800 rounded-xl flex flex-col gap-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Github className="w-4 h-4 text-white" />
+                      <span className="text-xs font-bold text-white uppercase tracking-wider">
+                        {lang === "bn" ? "গিটহাব প্লেলিস্ট সিঙ্ক ও পুশ" : "GitHub Playlist Sync & Push"}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setShowGithubConfig(!showGithubConfig)}
+                      className="text-[11px] text-yellow-500 hover:text-yellow-400 underline cursor-pointer"
+                    >
+                      {showGithubConfig 
+                        ? (lang === "bn" ? "সেটিংস লুকান" : "Hide Config") 
+                        : (lang === "bn" ? "টোকেন / কনফিগ পরিবর্তন" : "Token / Config")}
+                    </button>
+                  </div>
+
+                  {/* Status Banner */}
+                  {githubSyncResult && (
+                    <div
+                      className={`p-3 rounded-lg text-xs flex flex-col gap-1.5 border ${
+                        githubSyncResult.type === "success"
+                          ? "bg-green-500/10 border-green-500/30 text-green-300"
+                          : githubSyncResult.type === "warning"
+                          ? "bg-amber-500/10 border-amber-500/30 text-amber-300"
+                          : "bg-red-500/10 border-red-500/30 text-red-300"
+                      }`}
+                    >
+                      <div className="flex items-start gap-2">
+                        {githubSyncResult.type === "success" ? (
+                          <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0 mt-0.5" />
+                        ) : (
+                          <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                        )}
+                        <span className="font-medium">{githubSyncResult.message}</span>
+                      </div>
+                      {githubSyncResult.commitUrl && (
+                        <a
+                          href={githubSyncResult.commitUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="inline-flex items-center gap-1 text-[11px] text-green-400 underline ml-6 hover:text-green-300"
+                        >
+                          <span>{lang === "bn" ? "গিটহাব কমিট ও পরিবর্তন দেখুন" : "View Commit on GitHub"}</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Config Inputs */}
+                  {showGithubConfig && (
+                    <div className="p-3 bg-neutral-900 border border-neutral-800 rounded-lg flex flex-col gap-2.5 text-xs">
+                      <div>
+                        <label className="block text-[11px] text-neutral-400 mb-1 font-mono">
+                          {lang === "bn" ? "গিটহাব রিপোজিটরি (Owner/Repo):" : "GitHub Repository (Owner/Repo):"}
+                        </label>
+                        <input
+                          type="text"
+                          value={githubRepo}
+                          onChange={(e) => setGithubRepo(e.target.value)}
+                          placeholder="Romancecity/channel-filter"
+                          className="w-full bg-black border border-neutral-800 rounded-md px-2.5 py-1.5 text-neutral-200 font-mono text-xs focus:border-yellow-500 outline-none"
+                        />
+                      </div>
+
+                      <div className="flex gap-2">
+                        <div className="flex-1">
+                          <label className="block text-[11px] text-neutral-400 mb-1 font-mono">
+                            {lang === "bn" ? "GitHub Personal Access Token (PAT):" : "GitHub Personal Access Token (PAT):"}
+                          </label>
+                          <input
+                            type="password"
+                            value={githubToken}
+                            onChange={(e) => setGithubToken(e.target.value)}
+                            placeholder="ghp_xxxxxxxxxxxxxxxxxxxx"
+                            className="w-full bg-black border border-neutral-800 rounded-md px-2.5 py-1.5 text-neutral-200 font-mono text-xs focus:border-yellow-500 outline-none"
+                          />
+                        </div>
+                        <div className="w-24">
+                          <label className="block text-[11px] text-neutral-400 mb-1 font-mono">
+                            {lang === "bn" ? "ব্রাঞ্চ:" : "Branch:"}
+                          </label>
+                          <input
+                            type="text"
+                            value={githubBranch}
+                            onChange={(e) => setGithubBranch(e.target.value)}
+                            placeholder="main"
+                            className="w-full bg-black border border-neutral-800 rounded-md px-2.5 py-1.5 text-neutral-200 font-mono text-xs focus:border-yellow-500 outline-none"
+                          />
+                        </div>
+                      </div>
+
+                      <p className="text-[10.5px] text-neutral-400 leading-relaxed">
+                        {lang === "bn"
+                          ? "টোকেন তৈরি করতে GitHub > Settings > Developer settings > Personal access tokens (classic) এ গিয়ে 'repo' পারমিশন দিয়ে তৈরি করে এখানে পেস্ট করুন।"
+                          : "Generate a token from GitHub > Settings > Developer settings > Personal access tokens (classic) with 'repo' scope."}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Action Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-2 pt-1">
+                    <button
+                      type="button"
+                      onClick={handleRefreshPlaylist}
+                      disabled={isRefreshingPlaylist || isSyncingGithub}
+                      className="flex-1 bg-neutral-800 hover:bg-neutral-750 border border-neutral-700 text-neutral-200 py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-2 transition-colors cursor-pointer disabled:opacity-50"
+                    >
+                      <RefreshCw className={`w-3.5 h-3.5 ${isRefreshingPlaylist ? "animate-spin text-yellow-500" : ""}`} />
+                      <span>
+                        {isRefreshingPlaylist
+                          ? (lang === "bn" ? "রিফ্রেশ হচ্ছে..." : "Refreshing...")
+                          : (lang === "bn" ? "ওয়েবসাইট প্লেলিস্ট রিফ্রেশ" : "Refresh Local Playlist")}
+                      </span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleGithubSync}
+                      disabled={isSyncingGithub || isRefreshingPlaylist}
+                      className="flex-1 bg-yellow-600 hover:bg-yellow-500 text-black py-2 px-3 rounded-lg text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-md cursor-pointer disabled:opacity-50"
+                    >
+                      <UploadCloud className={`w-3.5 h-3.5 ${isSyncingGithub ? "animate-pulse" : ""}`} />
+                      <span>
+                        {isSyncingGithub
+                          ? (lang === "bn" ? "গিটহাবে পুশ হচ্ছে..." : "Syncing to GitHub...")
+                          : (lang === "bn" ? "গিটহাবে প্লেলিস্ট পুশ করুন" : "Push to GitHub")}
+                      </span>
+                    </button>
+                  </div>
+
+                  {/* GitHub Action CI/CD Note */}
+                  <div className="p-2.5 bg-neutral-900/60 border border-neutral-850 rounded-lg text-[11px] text-neutral-400 flex items-start gap-2">
+                    <Info className="w-3.5 h-3.5 text-neutral-400 shrink-0 mt-0.5" />
+                    <div className="flex flex-col gap-1">
+                      <span className="font-semibold text-neutral-300">
+                        {lang === "bn" ? "GitHub Actions অটো-আপডেট এরর সমাধান:" : "GitHub Actions Auto-Update Error Fix:"}
+                      </span>
+                      <span>
+                        {lang === "bn"
+                          ? "আপনার রিপোজিটরির Settings ➔ Actions ➔ General ➔ 'Workflow permissions'-এ গিয়ে 'Read and write permissions' সিলেক্ট করে সেভ করুন। এতে কোনো টোকেন ছাড়াও প্রতি ১ ঘন্টায় গিটহাব নিজে থেকেই প্লেলিস্ট আপডেট করবে।"
+                          : "Go to your GitHub repo Settings ➔ Actions ➔ General ➔ 'Workflow permissions' and select 'Read and write permissions'. This allows GitHub Actions to auto-push updates every hour."}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

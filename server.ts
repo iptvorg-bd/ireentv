@@ -20,9 +20,14 @@ const PROXY_HEADERS = {
 // CORS Setup
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
   next();
 });
+
+app.use(express.json());
 
 // In-memory cache for the playlist to avoid hitting rate limits and speed up client loading
 let cachedPlaylist: any = null;
@@ -316,6 +321,33 @@ function findMatchingChannelInList(channels: any[], query: string): any | null {
   return null;
 }
 
+function buildM3uString(channels: any[], data: any, baseUrl: string): string {
+  const lastUpdate = data?.last_update || data?.Last_update || new Date().toUTCString();
+  const channelsCount = channels.length;
+
+  let m3u = `#EXTM3U x-tvg-url=""\n`;
+  m3u += `# Playlist Name: IreenTV\n`;
+  m3u += `# Telegram: ${data?.telegram || "https://t.me/ireentv"}\n`;
+  m3u += `# Website: ${data?.website || "https://ireentv.pages.dev"}\n`;
+  m3u += `# Developer: ${data?.developer || "MD ANAMUL HOQUE"}\n`;
+  m3u += `# Version: ${data?.version || "2.0"}\n`;
+  m3u += `# Channels Amount: ${channelsCount}\n`;
+  m3u += `# Last Update: ${lastUpdate}\n\n`;
+
+  for (const ch of channels) {
+    const slug = cleanSlugName(ch.name);
+    const channelName = ch.name.trim();
+    const group = ch.group || "Sports";
+    const channelStreamUrl = `${baseUrl}/${slug}.m3u8`;
+    const logo = ch.logo || "";
+
+    m3u += `#EXTINF:-1 tvg-id="${ch.tvg_id || slug}" tvg-name="${channelName}" tvg-logo="${logo}" group-title="${group}",${channelName}\n`;
+    m3u += `${channelStreamUrl}\n\n`;
+  }
+
+  return m3u;
+}
+
 // Full M3U / M3U8 Playlist Generator Endpoint
 app.get(["/playlist.m3u", "/playlist.m3u8"], async (req, res) => {
   try {
@@ -325,28 +357,7 @@ app.get(["/playlist.m3u", "/playlist.m3u8"], async (req, res) => {
     const protocol = req.protocol || "https";
     const baseUrl = `${protocol}://${host}`;
 
-    const lastUpdate = data?.last_update || data?.Last_update || new Date().toUTCString();
-    const channelsCount = channels.length;
-
-    let m3u = `#EXTM3U x-tvg-url=""\n`;
-    m3u += `# Playlist Name: IreenTV\n`;
-    m3u += `# Telegram: ${data?.telegram || "https://t.me/ireentv"}\n`;
-    m3u += `# Website: ${data?.website || "https://ireentv.pages.dev"}\n`;
-    m3u += `# Developer: ${data?.developer || "MD ANAMUL HOQUE"}\n`;
-    m3u += `# Version: ${data?.version || "1.0"}\n`;
-    m3u += `# Channels Amount: ${channelsCount}\n`;
-    m3u += `# Last Update: ${lastUpdate}\n\n`;
-
-    for (const ch of channels) {
-      const slug = cleanSlugName(ch.name);
-      const channelName = ch.name.trim();
-      const group = ch.group || "Sports";
-      const channelStreamUrl = `${baseUrl}/${slug}.m3u8`;
-      const logo = ch.logo || "";
-
-      m3u += `#EXTINF:-1 tvg-id="${ch.tvg_id || slug}" tvg-name="${channelName}" tvg-logo="${logo}" group-title="${group}",${channelName}\n`;
-      m3u += `${channelStreamUrl}\n\n`;
-    }
+    const m3u = buildM3uString(channels, data, baseUrl);
 
     res.setHeader("Content-Type", "application/vnd.apple.mpegurl; charset=utf-8");
     res.setHeader("Content-Disposition", 'inline; filename="ireentv_playlist.m3u"');
@@ -388,6 +399,161 @@ app.get(["/:channelName.m3u8", "/channel/:channelName.m3u8"], async (req, res) =
     res.redirect(302, streamUrl);
   } catch (error: any) {
     res.status(500).send(`Error resolving stream: ${error.message}`);
+  }
+});
+
+// Refresh playlist endpoint to force remote re-fetch and re-generate local M3U files
+app.post("/api/refresh-playlist", async (req, res) => {
+  try {
+    const data = await fetchPlaylistFromRemote();
+    cachedPlaylist = data;
+    lastCacheTime = Date.now();
+
+    const baseUrl = "https://ireentv.pages.dev";
+    const m3uContent = buildM3uString(data.channels || [], data, baseUrl);
+
+    // Save locally to disk
+    try {
+      fs.writeFileSync(path.join(process.cwd(), "playlist.m3u"), m3uContent, "utf-8");
+      const pubDir = path.join(process.cwd(), "public");
+      if (fs.existsSync(pubDir)) {
+        fs.writeFileSync(path.join(pubDir, "playlist.m3u"), m3uContent, "utf-8");
+        fs.writeFileSync(path.join(pubDir, "playlist.m3u8"), m3uContent, "utf-8");
+      }
+    } catch (e: any) {
+      console.warn("Could not write local playlist files:", e.message);
+    }
+
+    res.json({
+      success: true,
+      message: "প্লেলিস্ট সফলভাবে রিফ্রেশ ও আপডেট হয়েছে!",
+      channels_count: data.channels?.length || 0,
+      last_update: data.Last_update || data.last_update || "Just Now"
+    });
+  } catch (error: any) {
+    console.error("Error refreshing playlist:", error.message);
+    res.status(500).json({ success: false, error: "প্লেলিস্ট ফেচ করতে ব্যর্থ হয়েছে: " + error.message });
+  }
+});
+
+// Sync playlist directly to GitHub repository
+app.post("/api/sync-github", async (req, res) => {
+  try {
+    const token = (req.body?.token || process.env.GITHUB_TOKEN || "").trim();
+    const repo = (req.body?.repo || process.env.GITHUB_REPO || "Romancecity/channel-filter").trim();
+    const branch = (req.body?.branch || process.env.GITHUB_BRANCH || "main").trim();
+    const filePath = (req.body?.filePath || "playlist.m3u").trim();
+
+    // 1. Force remote fetch and update local playlist first
+    const data = await fetchPlaylistFromRemote();
+    cachedPlaylist = data;
+    lastCacheTime = Date.now();
+
+    const baseUrl = "https://ireentv.pages.dev";
+    const m3uContent = buildM3uString(data.channels || [], data, baseUrl);
+
+    // Save locally
+    try {
+      fs.writeFileSync(path.join(process.cwd(), "playlist.m3u"), m3uContent, "utf-8");
+      const pubDir = path.join(process.cwd(), "public");
+      if (fs.existsSync(pubDir)) {
+        fs.writeFileSync(path.join(pubDir, "playlist.m3u"), m3uContent, "utf-8");
+        fs.writeFileSync(path.join(pubDir, "playlist.m3u8"), m3uContent, "utf-8");
+      }
+    } catch (e: any) {
+      console.warn("Could not write local playlist files:", e.message);
+    }
+
+    // 2. Check for token
+    if (!token) {
+      return res.status(200).json({
+        success: false,
+        needToken: true,
+        channelCount: data.channels?.length || 0,
+        message: "ওয়েবসাইটে প্লেলিস্ট রিফ্রেশ সফল হয়েছে! তবে গিটহাবে সরাসরি আপডেট করতে একটি GitHub Personal Access Token (PAT) প্রয়োজন।"
+      });
+    }
+
+    // 3. Parse owner and repo
+    const parts = repo.split("/");
+    if (parts.length !== 2 || !parts[0] || !parts[1]) {
+      return res.status(400).json({
+        success: false,
+        error: `ইনভ্যালিড রিপোজিটরি ফরম্যাট: "${repo}"। ফরম্যাট হতে হবে owner/repository (যেমন: Romancecity/channel-filter)`
+      });
+    }
+    const [owner, repoName] = parts;
+
+    const ghHeaders = {
+      "Authorization": `Bearer ${token}`,
+      "Accept": "application/vnd.github.v3+json",
+      "User-Agent": "IreenTV-Live-App",
+      "Content-Type": "application/json"
+    };
+
+    // 4. Check if file already exists to get its SHA
+    let existingSha: string | undefined;
+    const checkRes = await fetch(
+      `https://api.github.com/repos/${owner}/${repoName}/contents/${filePath}?ref=${encodeURIComponent(branch)}`,
+      { headers: ghHeaders }
+    );
+
+    if (checkRes.ok) {
+      const fileData: any = await checkRes.json();
+      existingSha = fileData.sha;
+    } else if (checkRes.status !== 404) {
+      const errJson: any = await checkRes.json().catch(() => ({}));
+      let msg = errJson.message || `GitHub error (Status ${checkRes.status})`;
+      if (checkRes.status === 401) {
+        msg = "GitHub Token টি সঠিক নয় বা মেয়াদ শেষ (401 Bad Credentials)। অনুগ্রহ করে একটি নতুন Personal Access Token দিন।";
+      } else if (checkRes.status === 403) {
+        msg = "GitHub Token-এ রিপোজিটরিতে লেখার অনুমতি নেই (403 Permission Denied)। Token Scope-এ 'repo' অথবা 'contents: write' পারমিশন দিন।";
+      }
+      return res.status(checkRes.status).json({ success: false, error: msg });
+    }
+
+    // 5. Commit/Push file to GitHub via Contents API
+    const putRes = await fetch(
+      `https://api.github.com/repos/${owner}/${repoName}/contents/${filePath}`,
+      {
+        method: "PUT",
+        headers: ghHeaders,
+        body: JSON.stringify({
+          message: `Auto-update ${filePath} (${data.channels?.length || 0} channels) [via IreenTV Website]`,
+          content: Buffer.from(m3uContent, "utf-8").toString("base64"),
+          sha: existingSha,
+          branch: branch
+        })
+      }
+    );
+
+    if (!putRes.ok) {
+      const errJson: any = await putRes.json().catch(() => ({}));
+      let msg = errJson.message || `GitHub PUT Error (Status ${putRes.status})`;
+      if (putRes.status === 401) {
+        msg = "GitHub Token টি ভুল (401 Bad credentials)।";
+      } else if (putRes.status === 403) {
+        msg = "গিটহাবে ফাইল পুশ করার পারমিশন নেই (403 Forbidden)। Token Scope এ 'repo' চেক করুন।";
+      } else if (putRes.status === 404) {
+        msg = `রিপোজিটরি "${repo}" অথবা ব্রাঞ্চ "${branch}" পাওয়া যায়নি (404 Not Found)।`;
+      } else if (putRes.status === 409) {
+        msg = "কনফ্লিক্ট হয়েছে (409 Conflict)। অনুগ্রহ করে কয়েক সেকেন্ড পর আবার চেষ্টা করুন।";
+      }
+      return res.status(putRes.status).json({ success: false, error: msg });
+    }
+
+    const putData: any = await putRes.json();
+
+    return res.json({
+      success: true,
+      message: `সফলভাবে গিটহাবে (${repo}) ${filePath} আপডেট হয়েছে!`,
+      commitUrl: putData.commit?.html_url,
+      channelCount: data.channels?.length || 0,
+      lastUpdate: data.Last_update || data.last_update
+    });
+  } catch (err: any) {
+    console.error("Error in /api/sync-github:", err);
+    return res.status(500).json({ success: false, error: "GitHub সিঙ্ক এরর: " + (err.message || "Internal server error") });
   }
 });
 

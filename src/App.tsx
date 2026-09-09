@@ -128,11 +128,17 @@ export default function App() {
         setLang("en"); // Enforce English
       }
 
-      const cachedRaw = localStorage.getItem("ireentv_cached_playlist_v2");
+      // Clean legacy cache keys
+      localStorage.removeItem("ireentv_cached_playlist");
+      localStorage.removeItem("ireentv_cached_playlist_v2");
+
+      const cachedRaw = localStorage.getItem("ireentv_cached_playlist_v3");
       if (cachedRaw) {
         const parsed = JSON.parse(cachedRaw);
         const normalized = normalizePlaylistData(parsed);
-        if (normalized && normalized.channels && normalized.channels.length > 0) {
+        // Only use cache if it contains properly populated multi-server channels
+        const hasMulti = normalized?.channels?.some((c: any) => c.servers && c.servers.length > 1);
+        if (normalized && normalized.channels && normalized.channels.length > 0 && hasMulti) {
           setPlaylist(normalized);
         }
       }
@@ -204,9 +210,15 @@ export default function App() {
       
       if (data && data.channels && data.channels.length > 0) {
         setPlaylist(data);
+        setActiveChannel((prev) => {
+          if (!prev) return null;
+          const matched = data!.channels.find((c) => c.name === prev.name || c.id === prev.id);
+          return matched || prev;
+        });
         try {
-          localStorage.setItem("ireentv_cached_playlist_v2", JSON.stringify(data));
-          localStorage.removeItem("ireentv_cached_playlist"); // remove stale previous playlist
+          localStorage.setItem("ireentv_cached_playlist_v3", JSON.stringify(data));
+          localStorage.removeItem("ireentv_cached_playlist_v2");
+          localStorage.removeItem("ireentv_cached_playlist");
         } catch (e) {
           console.warn("Could not save playlist to local storage", e);
         }

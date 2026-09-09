@@ -1,5 +1,5 @@
 import React from "react";
-import { Star, Play, Tv } from "lucide-react";
+import { Star, Play, Tv, Radio } from "lucide-react";
 import { motion } from "motion/react";
 import { Channel } from "../types";
 
@@ -23,6 +23,8 @@ export default function ChannelCard({ channel, isActive, isFavorite, onSelect, o
   const handleImageError = () => {
     setImgError(true);
   };
+
+  const serverCount = channel.servers && channel.servers.length > 0 ? channel.servers.length : (channel.server_num || 1);
 
   return (
     <motion.div
@@ -85,18 +87,30 @@ export default function ChannelCard({ channel, isActive, isFavorite, onSelect, o
         </button>
       </div>
 
-      {/* Bottom row: Name, Category, and Play Button */}
-      <div className="flex flex-col gap-1 z-10">
-        <span className="text-[10px] font-mono text-neutral-500 truncate uppercase tracking-wider">
-          {channel.group || "Sports"}
-        </span>
+      {/* Bottom row: Category, Server Count Badge, Name, and Play Button */}
+      <div className="flex flex-col gap-1.5 z-10">
+        <div className="flex items-center justify-between gap-1">
+          <span className="text-[10px] font-mono text-neutral-400 truncate uppercase tracking-wider">
+            {channel.group || "Sports"}
+          </span>
+          {serverCount > 1 ? (
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-red-950/80 border border-red-700/60 text-red-300 shrink-0 font-bold tracking-wide flex items-center gap-1 shadow-sm">
+              <Radio className="w-2.5 h-2.5 text-red-400 animate-pulse" />
+              <span>{serverCount} Servers</span>
+            </span>
+          ) : (
+            <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-neutral-950/80 border border-neutral-800 text-neutral-500 shrink-0 font-medium">
+              1 Server
+            </span>
+          )}
+        </div>
         <div className="flex items-center justify-between gap-2">
           <h3 className="font-bold text-sm text-neutral-100 group-hover:text-white truncate font-sans">
             {channel.name}
           </h3>
           
           {/* Mini Play action visualizer */}
-          <div className={`p-1 rounded-full transition-all duration-300 ${
+          <div className={`p-1 rounded-full transition-all duration-300 shrink-0 ${
             isActive 
               ? "bg-red-600 text-white" 
               : "bg-neutral-950 text-neutral-400 group-hover:bg-red-600 group-hover:text-white"

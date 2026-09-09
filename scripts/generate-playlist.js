@@ -32,6 +32,46 @@ function cleanUnicodeText(str) {
   return res;
 }
 
+function assignServerNumbers(rawChannels) {
+  if (!rawChannels || rawChannels.length === 0) return [];
+
+  const nameCounts = {};
+  for (const c of rawChannels) {
+    const rawName = (c.name || "Channel").toString().trim();
+    const cleanName = cleanUnicodeText(rawName).trim();
+    const baseName = cleanName.replace(/[\s,_-]+(?:server|sarvar)[\s,_-]*\d+$/i, "").trim();
+    const key = baseName.toLowerCase();
+    nameCounts[key] = (nameCounts[key] || 0) + 1;
+  }
+
+  const serverCounters = {};
+  return rawChannels.map((c) => {
+    const rawName = (c.name || "Channel").toString().trim();
+    const cleanName = cleanUnicodeText(rawName).trim();
+    const baseName = cleanName.replace(/[\s,_-]+(?:server|sarvar)[\s,_-]*\d+$/i, "").trim();
+    const key = baseName.toLowerCase();
+
+    if (nameCounts[key] > 1) {
+      serverCounters[key] = (serverCounters[key] || 0) + 1;
+      const serverNum = serverCounters[key];
+      const numberedName = `${baseName} Server ${serverNum}`;
+      return {
+        ...c,
+        name: numberedName,
+        server_num: serverNum,
+        base_name: baseName
+      };
+    }
+
+    return {
+      ...c,
+      name: cleanName,
+      server_num: 1,
+      base_name: baseName
+    };
+  });
+}
+
 async function run() {
   console.log("Fetching live channels playlist from working_playlist.m3u...");
   let channels = [];
@@ -114,6 +154,9 @@ async function run() {
     console.error("Error: Could not retrieve channels from any source.");
     process.exit(1);
   }
+
+  // Assign Server 1, Server 2, etc. for duplicate channels
+  channels = assignServerNumbers(channels);
 
   // Ensure directories exist
   const publicDir = path.join(process.cwd(), "public");

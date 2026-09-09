@@ -13,6 +13,62 @@ interface ChannelItem {
   group?: string;
   referer?: string;
   user_agent?: string;
+  server_num?: number;
+  base_name?: string;
+}
+
+function cleanUnicodeText(str: string): string {
+  if (!str) return "";
+  let res = "";
+  for (const char of str) {
+    const cp = char.codePointAt(0) || 0;
+    if (cp >= 0x1D400 && cp <= 0x1D419) res += String.fromCharCode(cp - 0x1D400 + 65);
+    else if (cp >= 0x1D41A && cp <= 0x1D433) res += String.fromCharCode(cp - 0x1D41A + 97);
+    else if (cp >= 0x1D5D4 && cp <= 0x1D5ED) res += String.fromCharCode(cp - 0x1D5D4 + 65);
+    else if (cp >= 0x1D5EE && cp <= 0x1D607) res += String.fromCharCode(cp - 0x1D5EE + 97);
+    else res += char;
+  }
+  return res;
+}
+
+function assignServerNumbers(rawChannels: ChannelItem[]): ChannelItem[] {
+  if (!rawChannels || rawChannels.length === 0) return [];
+
+  const nameCounts: Record<string, number> = {};
+  for (const c of rawChannels) {
+    const rawName = (c.name || "Channel").trim();
+    const cleanName = cleanUnicodeText(rawName).trim();
+    const baseName = cleanName.replace(/[\s,_-]+(?:server|sarvar)[\s,_-]*\d+$/i, "").trim();
+    const key = baseName.toLowerCase();
+    nameCounts[key] = (nameCounts[key] || 0) + 1;
+  }
+
+  const serverCounters: Record<string, number> = {};
+  return rawChannels.map((c) => {
+    const rawName = (c.name || "Channel").trim();
+    const cleanName = cleanUnicodeText(rawName).trim();
+    const baseName = cleanName.replace(/[\s,_-]+(?:server|sarvar)[\s,_-]*\d+$/i, "").trim();
+    const key = baseName.toLowerCase();
+
+    if (nameCounts[key] > 1) {
+      serverCounters[key] = (serverCounters[key] || 0) + 1;
+      const serverNum = serverCounters[key];
+      const numberedName = `${baseName} Server ${serverNum}`;
+      return {
+        ...c,
+        name: numberedName,
+        server_num: serverNum,
+        base_name: baseName
+      };
+    }
+
+    return {
+      ...c,
+      name: cleanName,
+      server_num: 1,
+      base_name: baseName
+    };
+  });
 }
 
 function slugify(str: string): string {
@@ -45,15 +101,32 @@ function findChannel(channels: ChannelItem[], query: string): ChannelItem | null
   const exact = channels.find(c => c.name && c.name.trim().toLowerCase() === clean.toLowerCase());
   if (exact) return exact;
 
-  // 2. Slug match (handles LaLigaTV -> La Liga TV, T_Sports -> T Sports)
+  // 2. Slug match
   const slugMatch = channels.find(c => slugify(c.name || "") === qSlug);
   if (slugMatch) return slugMatch;
 
-  // 3. Match by tvg_id
+  // 3. Match by base name + server number in query (e.g. T_Sports_HD_2, T_Sports_HD_Server_2, Star_Sports_1_Server_3)
+  const serverMatch = clean.match(/^(.*?)[_\s-]*(?:server|sarvar)?[_\s-]*(\d+)$/i);
+  if (serverMatch) {
+    const baseQSlug = slugify(serverMatch[1]);
+    const num = parseInt(serverMatch[2], 10);
+    const byServer = channels.find(c => {
+      const baseMatch = (c.base_name && slugify(c.base_name) === baseQSlug) ||
+                        slugify(c.name || "").startsWith(baseQSlug);
+      return baseMatch && (c.server_num === num || slugify(c.name || "").endsWith(`server${num}`) || slugify(c.name || "").endsWith(`${num}`));
+    });
+    if (byServer) return byServer;
+  }
+
+  // 4. Default fallback: if base name requested without server number (e.g. T_Sports_HD), return server 1
+  const baseMatch = channels.find(c => (c.base_name && slugify(c.base_name) === qSlug));
+  if (baseMatch) return baseMatch;
+
+  // 5. Match by tvg_id
   const tvgMatch = channels.find(c => c.tvg_id && slugify(c.tvg_id) === qSlug);
   if (tvgMatch) return tvgMatch;
 
-  // 4. Partial match
+  // 6. Partial match
   const partial = channels.find(c => {
     const s = slugify(c.name || "");
     return s.includes(qSlug) || qSlug.includes(s);
@@ -139,6 +212,8 @@ export const onRequest = async (context: any): Promise<Response> => {
     if (channels.length === 0) {
       return new Response("Unable to load channel playlist from upstream.", { status: 502 });
     }
+
+    channels = assignServerNumbers(channels);
 
     const matchedChannel = findChannel(channels, channelQuery);
     const streamUrl = matchedChannel ? getChannelStreamUrl(matchedChannel) : "";

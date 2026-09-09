@@ -12,6 +12,21 @@ export interface ChannelAttrs {
   [key: string]: string | undefined;
 }
 
+export interface ChannelServer {
+  id?: number | string;
+  server_num: number;
+  name: string;
+  label: string;
+  quality?: string;
+  url: string;
+  stream_url?: string;
+  raw_stream_url?: string;
+  logo?: string;
+  referer?: string;
+  user_agent?: string;
+  headers?: ChannelHeaders;
+}
+
 export interface Channel {
   id?: number | string;
   name: string;
@@ -26,6 +41,10 @@ export interface Channel {
   user_agent?: string;
   headers?: ChannelHeaders;
   attrs?: ChannelAttrs;
+  server_num?: number;
+  base_name?: string;
+  servers?: ChannelServer[];
+  active_server_index?: number;
 }
 
 export interface PlaylistInfo {

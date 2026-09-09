@@ -57,6 +57,24 @@ export function normalizeChannel(raw: any, index: number = 0): Channel {
   const referer = raw.referer || (raw.headers ? raw.headers.Referer : undefined);
   const userAgent = raw.user_agent || (raw.headers ? raw.headers["User-Agent"] : undefined);
 
+  // 3. Preserve servers if already present
+  const servers: import("./types").ChannelServer[] | undefined = Array.isArray(raw.servers) && raw.servers.length > 0
+    ? raw.servers.map((s: any, sIdx: number) => ({
+        id: s.id ?? (sIdx + 1),
+        server_num: s.server_num ?? (sIdx + 1),
+        name: s.name || `${name} Server ${sIdx + 1}`,
+        label: s.label || `Server ${sIdx + 1}`,
+        quality: s.quality,
+        url: s.url || "",
+        stream_url: s.stream_url || s.url || "",
+        raw_stream_url: s.raw_stream_url || s.stream_url || s.url || "",
+        logo: s.logo || logo,
+        referer: s.referer,
+        user_agent: s.user_agent,
+        headers: s.headers
+      }))
+    : undefined;
+
   return {
     id: raw.id ?? (index + 1),
     name,
@@ -77,7 +95,11 @@ export function normalizeChannel(raw: any, index: number = 0): Channel {
     attrs: {
       "tvg-id": tvgId,
       ...(raw.attrs || {})
-    }
+    },
+    servers,
+    server_num: servers ? servers.length : (raw.server_num || 1),
+    active_server_index: raw.active_server_index ?? 0,
+    base_name: raw.base_name || name
   };
 }
 
@@ -94,7 +116,19 @@ export function normalizePlaylistData(raw: any): PlaylistData {
     rawChannels = raw;
   }
 
-  const channels: Channel[] = rawChannels.map((c, i) => normalizeChannel(c, i));
+  const normalizedChannels: Channel[] = rawChannels.map((c, i) => normalizeChannel(c, i));
+
+  // Check if raw data was already grouped with multiple servers
+  const hasMultiServers = normalizedChannels.some(c => c.servers && c.servers.length > 1);
+
+  let channels: Channel[];
+  if (hasMultiServers) {
+    // Already populated with multiple servers; do not strip or collapse!
+    channels = normalizedChannels;
+  } else {
+    const numberedChannels: Channel[] = assignServerNumbers(normalizedChannels);
+    channels = groupChannelsForWebsite(numberedChannels);
+  }
   const info = raw.info || {};
 
   return {
@@ -105,13 +139,60 @@ export function normalizePlaylistData(raw: any): PlaylistData {
     telegram: raw.telegram || info.telegram || "https://t.me/ireentv",
     website: raw.website || info.website || "https://ireentv.pages.dev",
     developer: raw.developer || info.developer || "MD ANAMUL HOQUE",
-    version: raw.version || info.version || "1.0",
+    version: raw.version || info.version || "2.0",
     channels_amount: raw.channels_amount || info.channels_amount || channels.length,
     Last_update: raw.Last_update || raw.last_update || info.last_update || "Just Now",
     last_update: raw.last_update || raw.Last_update || info.last_update || "Just Now",
     info,
     channels
   };
+}
+
+/**
+ * Assigns numbered server labels (e.g. "Server 1", "Server 2") to duplicate/multi-stream channels
+ * If a channel name appears multiple times in the playlist, each stream is distinctly numbered:
+ * "T Sports HD Server 1", "T Sports HD Server 2", "Star Sports 1 Server 1", etc.
+ */
+export function assignServerNumbers<T extends { name: string; url?: string; stream_url?: string; [key: string]: any }>(channels: T[]): T[] {
+  if (!channels || channels.length === 0) return [];
+
+  // Count occurrences of each base name
+  const nameCounts: Record<string, number> = {};
+  for (const c of channels) {
+    const rawName = (c.name || "Channel").toString().trim();
+    const cleanName = cleanUnicodeText(rawName).trim();
+    const baseName = cleanName.replace(/[\s,_-]+(?:server|sarvar)[\s,_-]*\d+$/i, "").trim();
+    const key = baseName.toLowerCase();
+    nameCounts[key] = (nameCounts[key] || 0) + 1;
+  }
+
+  // Assign numbers for items where count > 1
+  const serverCounters: Record<string, number> = {};
+  return channels.map((c) => {
+    const rawName = (c.name || "Channel").toString().trim();
+    const cleanName = cleanUnicodeText(rawName).trim();
+    const baseName = cleanName.replace(/[\s,_-]+(?:server|sarvar)[\s,_-]*\d+$/i, "").trim();
+    const key = baseName.toLowerCase();
+
+    if (nameCounts[key] > 1) {
+      serverCounters[key] = (serverCounters[key] || 0) + 1;
+      const serverNum = serverCounters[key];
+      const numberedName = `${baseName} Server ${serverNum}`;
+      return {
+        ...c,
+        name: numberedName,
+        server_num: serverNum,
+        base_name: baseName
+      };
+    }
+
+    return {
+      ...c,
+      name: cleanName,
+      server_num: 1,
+      base_name: baseName
+    };
+  });
 }
 
 /**
@@ -145,6 +226,144 @@ export function cleanUnicodeText(str: string): string {
 }
 
 /**
+ * Extracts quality tag like "HD", "FHD", "SD", "4K" from a channel title
+ */
+export function extractQuality(name: string): string | undefined {
+  if (!name) return undefined;
+  const m = name.match(/\b(4K|UHD|FHD|FULL\s*HD|HD|SD|HEVC|1080p|720p)\b/i);
+  return m ? m[1].toUpperCase().replace(/\s+/g, "") : undefined;
+}
+
+/**
+ * Groups multiple streams of the same channel (HD, SD, Server 1, Server 2, etc.)
+ * into a single unified Channel object for website display.
+ * The resulting channel object contains the complete list of available servers
+ * so that users can view the server count and switch servers in the player.
+ */
+export function groupChannelsForWebsite(channels: Channel[]): Channel[] {
+  if (!channels || channels.length === 0) return [];
+
+  const groups = new Map<string, {
+    primary: Channel;
+    servers: import("./types").ChannelServer[];
+    bestName: string;
+    bestLogo: string;
+  }>();
+
+  for (const ch of channels) {
+    const rawName = (ch.name || "Channel").toString().trim();
+    const cleanName = cleanUnicodeText(rawName).trim();
+    const withoutServer = cleanName.replace(/[\s,_-]+(?:server|sarvar)[\s,_-]*\d+$/i, "").trim();
+    const quality = extractQuality(withoutServer) || extractQuality(cleanName);
+
+    // Canonical grouping key without quality tags and punctuation (e.g. "tsports", "starsports1")
+    const canonicalKey = withoutServer
+      .replace(/\b(4K|UHD|FHD|FULL\s*HD|HD|SD|HEVC|1080p|720p)\b/gi, "")
+      .replace(/[^\w]/g, "")
+      .toLowerCase() || withoutServer.toLowerCase();
+
+    // Check if channel already has a server number in name
+    const serverNumMatch = rawName.match(/(?:server|sarvar)[\s,_-]*(\d+)/i);
+    const explicitServerNum = serverNumMatch ? parseInt(serverNumMatch[1], 10) : undefined;
+
+    // Existing or new group entry
+    if (!groups.has(canonicalKey)) {
+      groups.set(canonicalKey, {
+        primary: { ...ch },
+        servers: [],
+        bestName: withoutServer,
+        bestLogo: ch.logo || ""
+      });
+    }
+
+    const entry = groups.get(canonicalKey)!;
+
+    // If channel ALREADY has a servers array, adopt them!
+    if (Array.isArray(ch.servers) && ch.servers.length > 0) {
+      for (const s of ch.servers) {
+        if (!entry.servers.some(existing => existing.url === s.url)) {
+          entry.servers.push({ ...s });
+        }
+      }
+    } else {
+      // Single channel stream
+      const serverNum = explicitServerNum || (entry.servers.length + 1);
+      const label = quality ? `Server ${serverNum} (${quality})` : `Server ${serverNum}`;
+      const newServer: import("./types").ChannelServer = {
+        id: ch.id || (entry.servers.length + 1),
+        server_num: serverNum,
+        name: cleanName,
+        label,
+        quality,
+        url: ch.url,
+        stream_url: ch.stream_url || ch.url,
+        raw_stream_url: ch.raw_stream_url || ch.url,
+        logo: ch.logo,
+        referer: ch.referer,
+        user_agent: ch.user_agent,
+        headers: ch.headers
+      };
+      if (!entry.servers.some(existing => existing.url === newServer.url)) {
+        entry.servers.push(newServer);
+      }
+    }
+
+    // Prefer a name that includes "HD" or is more descriptive
+    if (!entry.bestName.includes("HD") && withoutServer.includes("HD")) {
+      entry.bestName = withoutServer;
+    }
+    if (!entry.bestLogo && ch.logo) {
+      entry.bestLogo = ch.logo;
+    }
+  }
+
+  // Build final unified channels list
+  const result: Channel[] = [];
+  for (const entry of groups.values()) {
+    // If no servers were added (fallback), create one
+    if (entry.servers.length === 0) {
+      entry.servers.push({
+        id: entry.primary.id || 1,
+        server_num: 1,
+        name: entry.primary.name,
+        label: "Server 1",
+        url: entry.primary.url,
+        stream_url: entry.primary.stream_url || entry.primary.url,
+        raw_stream_url: entry.primary.raw_stream_url || entry.primary.url,
+        logo: entry.primary.logo
+      });
+    }
+
+    // Sort servers by server_num
+    entry.servers.sort((a, b) => a.server_num - b.server_num);
+
+    // Re-index server numbers cleanly 1..N and format labels
+    entry.servers.forEach((s, idx) => {
+      s.server_num = idx + 1;
+      if (!s.label || s.label.startsWith("Server ")) {
+        s.label = s.quality ? `Server ${idx + 1} (${s.quality})` : `Server ${idx + 1}`;
+      }
+    });
+
+    const firstServer = entry.servers[0];
+    result.push({
+      ...entry.primary,
+      name: entry.bestName,
+      logo: entry.bestLogo || entry.primary.logo,
+      url: firstServer.url,
+      stream_url: firstServer.stream_url,
+      raw_stream_url: firstServer.raw_stream_url,
+      servers: entry.servers,
+      active_server_index: 0,
+      server_num: entry.servers.length, // total servers count
+      base_name: entry.bestName
+    });
+  }
+
+  return result;
+}
+
+/**
  * Parses raw M3U / M3U8 string format into structured PlaylistData
  */
 export function parseM3uToPlaylistData(m3uContent: string): PlaylistData {
@@ -175,7 +394,7 @@ export function parseM3uToPlaylistData(m3uContent: string): PlaylistData {
     if (currentExtInf && !line.startsWith("#")) {
       const streamUrl = line.trim();
 
-      const commaIdx = currentExtInf.indexOf(",");
+      const commaIdx = currentExtInf.lastIndexOf(",");
       const metaPart = commaIdx !== -1 ? currentExtInf.substring(0, commaIdx) : currentExtInf;
       const channelTitle = commaIdx !== -1 ? currentExtInf.substring(commaIdx + 1).trim() : `Channel ${channels.length + 1}`;
 
@@ -222,6 +441,9 @@ export function parseM3uToPlaylistData(m3uContent: string): PlaylistData {
     }
   }
 
+  const numberedChannels = assignServerNumbers(channels);
+  const groupedChannels = groupChannelsForWebsite(numberedChannels);
+
   return {
     status: "success",
     name: playlistName,
@@ -231,10 +453,10 @@ export function parseM3uToPlaylistData(m3uContent: string): PlaylistData {
     website: "https://ireentv.pages.dev",
     developer: "MD ANAMUL HOQUE",
     version: "2.0",
-    channels_amount: channels.length,
+    channels_amount: groupedChannels.length,
     Last_update: lastUpdate,
     last_update: lastUpdate,
-    channels
+    channels: groupedChannels
   };
 }
 
@@ -276,7 +498,24 @@ export function findMatchingChannel(channels: ChannelItem[] | Channel[], request
   );
   if (slugMatch) return slugMatch;
 
-  // 3. Partial contains match if close enough
+  // 3. Match by base name + server number in query (e.g. T_Sports_HD_2, T_Sports_HD_Server_2, Star_Sports_1_Server_3)
+  const serverMatch = cleanInput.match(/^(.*?)[_\s-]*(?:server|sarvar)?[_\s-]*(\d+)$/i);
+  if (serverMatch) {
+    const baseQSlug = slugifyChannelName(serverMatch[1]);
+    const num = parseInt(serverMatch[2], 10);
+    const byServer = channels.find((c: any) => {
+      const baseMatch = (c.base_name && slugifyChannelName(c.base_name) === baseQSlug) ||
+                        slugifyChannelName(c.name).startsWith(baseQSlug);
+      return baseMatch && (c.server_num === num || slugifyChannelName(c.name).endsWith(`server${num}`) || slugifyChannelName(c.name).endsWith(`${num}`));
+    });
+    if (byServer) return byServer;
+  }
+
+  // 4. Default fallback: if base name requested without server number (e.g. T_Sports_HD), return server 1
+  const baseMatch = channels.find((c: any) => (c.base_name && slugifyChannelName(c.base_name) === inputSlug));
+  if (baseMatch) return baseMatch;
+
+  // 5. Partial contains match if close enough
   const partial = channels.find(
     (c) => slugifyChannelName(c.name).includes(inputSlug) || inputSlug.includes(slugifyChannelName(c.name))
   );

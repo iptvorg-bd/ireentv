@@ -10,6 +10,62 @@ interface ChannelItem {
   tvg_id?: string;
   logo?: string;
   group?: string;
+  server_num?: number;
+  base_name?: string;
+}
+
+function cleanUnicodeText(str: string): string {
+  if (!str) return "";
+  let res = "";
+  for (const char of str) {
+    const cp = char.codePointAt(0) || 0;
+    if (cp >= 0x1D400 && cp <= 0x1D419) res += String.fromCharCode(cp - 0x1D400 + 65);
+    else if (cp >= 0x1D41A && cp <= 0x1D433) res += String.fromCharCode(cp - 0x1D41A + 97);
+    else if (cp >= 0x1D5D4 && cp <= 0x1D5ED) res += String.fromCharCode(cp - 0x1D5D4 + 65);
+    else if (cp >= 0x1D5EE && cp <= 0x1D607) res += String.fromCharCode(cp - 0x1D5EE + 97);
+    else res += char;
+  }
+  return res;
+}
+
+function assignServerNumbers(rawChannels: ChannelItem[]): ChannelItem[] {
+  if (!rawChannels || rawChannels.length === 0) return [];
+
+  const nameCounts: Record<string, number> = {};
+  for (const c of rawChannels) {
+    const rawName = (c.name || "Channel").trim();
+    const cleanName = cleanUnicodeText(rawName).trim();
+    const baseName = cleanName.replace(/[\s,_-]+(?:server|sarvar)[\s,_-]*\d+$/i, "").trim();
+    const key = baseName.toLowerCase();
+    nameCounts[key] = (nameCounts[key] || 0) + 1;
+  }
+
+  const serverCounters: Record<string, number> = {};
+  return rawChannels.map((c) => {
+    const rawName = (c.name || "Channel").trim();
+    const cleanName = cleanUnicodeText(rawName).trim();
+    const baseName = cleanName.replace(/[\s,_-]+(?:server|sarvar)[\s,_-]*\d+$/i, "").trim();
+    const key = baseName.toLowerCase();
+
+    if (nameCounts[key] > 1) {
+      serverCounters[key] = (serverCounters[key] || 0) + 1;
+      const serverNum = serverCounters[key];
+      const numberedName = `${baseName} Server ${serverNum}`;
+      return {
+        ...c,
+        name: numberedName,
+        server_num: serverNum,
+        base_name: baseName
+      };
+    }
+
+    return {
+      ...c,
+      name: cleanName,
+      server_num: 1,
+      base_name: baseName
+    };
+  });
 }
 
 function cleanSlug(name: string): string {
@@ -96,6 +152,9 @@ export const onRequest = async (context: any): Promise<Response> => {
         headers: { "Content-Type": "audio/x-mpegurl; charset=utf-8" }
       });
     }
+
+    // Number duplicate channels with Server 1, Server 2, etc.
+    channels = assignServerNumbers(channels);
 
     let m3u = `#EXTM3U x-tvg-url=""\n`;
     m3u += `# Playlist Name: IreenTV\n`;

@@ -3,7 +3,7 @@ import Hls from "hls.js";
 import { 
   Play, Pause, Volume2, VolumeX, Maximize, RotateCw, 
   Settings, Activity, AlertTriangle, Monitor, Sliders, Check, HelpCircle,
-  Share2, Link, Copy, X, Tv, Code, ListVideo, ExternalLink
+  Share2, Link, Copy, X, Tv, Code, ListVideo, ExternalLink, Server, Radio, Layers
 } from "lucide-react";
 import { Channel, Language, Translations } from "../types";
 
@@ -13,9 +13,10 @@ interface VideoPlayerProps {
   t: Translations;
   isEmbed?: boolean;
   onClose?: () => void;
+  onServerChange?: (serverIndex: number) => void;
 }
 
-export default function VideoPlayer({ channel, lang, t, isEmbed = false, onClose }: VideoPlayerProps) {
+export default function VideoPlayer({ channel, lang, t, isEmbed = false, onClose, onServerChange }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const hlsRef = useRef<Hls | null>(null);
@@ -27,6 +28,14 @@ export default function VideoPlayer({ channel, lang, t, isEmbed = false, onClose
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [isTheater, setIsTheater] = useState<boolean>(false);
   const [showControls, setShowControls] = useState<boolean>(true);
+
+  // Multi-server state
+  const [activeServerIndex, setActiveServerIndex] = useState<number>(channel?.active_server_index || 0);
+
+  // Reset active server index when channel changes
+  useEffect(() => {
+    setActiveServerIndex(channel?.active_server_index || 0);
+  }, [channel?.name]);
   
   // Auto-hide controls helper
   const resetControlsTimeout = () => {
@@ -148,8 +157,25 @@ export default function VideoPlayer({ channel, lang, t, isEmbed = false, onClose
   };
 
 
+  // Get current server info
+  const servers = channel?.servers && channel.servers.length > 0 ? channel.servers : [];
+  const currentServer = (servers && servers.length > 0 && servers[activeServerIndex]) 
+    ? servers[activeServerIndex] 
+    : (servers.length > 0 ? servers[0] : null);
+
   // Construct URL
   const getStreamUrl = () => {
+    if (currentServer) {
+      if (currentServer.raw_stream_url && currentServer.raw_stream_url.trim()) {
+        return currentServer.raw_stream_url.trim();
+      }
+      if (currentServer.stream_url && currentServer.stream_url.trim()) {
+        return currentServer.stream_url.split("|")[0].trim();
+      }
+      if (currentServer.url && currentServer.url.trim()) {
+        return currentServer.url.split("|")[0].trim();
+      }
+    }
     if (!channel) return "";
     if (channel.raw_stream_url && channel.raw_stream_url.trim()) {
       return channel.raw_stream_url.trim();
@@ -164,6 +190,17 @@ export default function VideoPlayer({ channel, lang, t, isEmbed = false, onClose
   };
 
   const streamUrl = getStreamUrl();
+
+  const handleSwitchServer = (index: number) => {
+    if (index === activeServerIndex) return;
+    setActiveServerIndex(index);
+    setIsLoading(true);
+    setHasError(false);
+    setErrorMessage("");
+    if (onServerChange) {
+      onServerChange(index);
+    }
+  };
 
   // Initialize and tear down HLS.js
   useEffect(() => {
@@ -292,7 +329,7 @@ export default function VideoPlayer({ channel, lang, t, isEmbed = false, onClose
         hlsRef.current = null;
       }
     };
-  }, [streamUrl]);
+  }, [streamUrl, activeServerIndex]);
 
   // Video controller interactions
   const handlePlayPause = () => {
@@ -516,20 +553,45 @@ export default function VideoPlayer({ channel, lang, t, isEmbed = false, onClose
 
         {/* Error / Offline Stream Overlay */}
         {hasError && (
-          <div className="absolute inset-0 bg-neutral-950/90 backdrop-blur-sm flex flex-col items-center justify-center p-6 text-center z-10 animate-fade-in">
-            <AlertTriangle className="w-16 h-16 text-red-500 mb-4 animate-bounce" />
-            <h3 className="text-xl font-bold text-white mb-2 font-sans">
+          <div className="absolute inset-0 bg-neutral-950/95 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center z-10 animate-fade-in">
+            <AlertTriangle className="w-16 h-16 text-red-500 mb-3 animate-bounce" />
+            <h3 className="text-xl font-bold text-white mb-1 font-sans">
               {lang === "bn" ? "স্ট্রিম চালু করতে সমস্যা হয়েছে" : "Failed to load Live Stream"}
             </h3>
-            <p className="text-xs text-neutral-400 max-w-md mb-6 font-mono">
+            <p className="text-xs text-neutral-400 max-w-md mb-4 font-mono">
               {errorMessage || (lang === "bn" ? "অনাকাঙ্ক্ষিত নেটওয়ার্ক বিভ্রাট।" : "An unexpected stream source error occurred.")}
             </p>
             
+            {/* Quick alternative servers fallback buttons on error screen */}
+            {servers.length > 1 && (
+              <div className="bg-neutral-900/90 border border-neutral-800 rounded-2xl p-4 max-w-md w-full mb-4 flex flex-col items-center gap-2.5">
+                <span className="text-xs font-bold text-amber-400 font-sans flex items-center gap-1.5">
+                  <Server className="w-3.5 h-3.5" />
+                  {lang === "bn" ? "অন্য সার্ভারে চেষ্টা করুন:" : "Try an alternative server:"}
+                </span>
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {servers.map((s, idx) => (
+                    <button
+                      key={s.server_num || idx}
+                      onClick={() => handleSwitchServer(idx)}
+                      className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all active:scale-95 cursor-pointer font-sans ${
+                        activeServerIndex === idx
+                          ? "bg-red-600/30 text-red-300 border border-red-500/40 cursor-not-allowed opacity-50"
+                          : "bg-red-600 hover:bg-red-500 text-white shadow-lg shadow-red-600/30"
+                      }`}
+                    >
+                      {s.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {/* Action Buttons to help troubleshoot stream */}
             <div className="flex flex-wrap gap-3 justify-center">
               <button 
                 onClick={handleReload}
-                className="px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-bold rounded-xl flex items-center gap-2 transition-all shadow-lg shadow-red-600/30 active:scale-95 text-sm font-sans"
+                className="px-5 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-white font-bold rounded-xl flex items-center gap-2 transition-all active:scale-95 text-xs font-sans border border-neutral-700"
               >
                 <RotateCw className="w-4 h-4" />
                 {t.reloadStream}
@@ -706,40 +768,121 @@ export default function VideoPlayer({ channel, lang, t, isEmbed = false, onClose
 
       {/* Under-Player Metadata & Live Playlist Stream Controls Info */}
       {!isEmbed && (
-        <div className="bg-[#050505] px-6 py-5 border-t border-neutral-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div className="flex items-start gap-4">
-            {channel?.logo ? (
-              <img 
-                src={channel.logo} 
-                alt={channel.name} 
-                referrerPolicy="no-referrer"
-                onError={(e) => {
-                  // If logo fails to load, replace with dummy text initials
-                  e.currentTarget.style.display = "none";
-                }}
-                className="w-14 h-14 object-contain rounded-xl bg-[#050505] border border-neutral-800 p-1 bg-white/5"
-              />
-            ) : (
-              <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-red-600 to-red-950 flex items-center justify-center font-bold text-white text-xl font-sans italic">
-                {channel?.name?.slice(0, 2).toUpperCase()}
+        <div className="bg-[#050505] px-5 py-4 sm:px-6 sm:py-5 border-t border-neutral-800 flex flex-col gap-4">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-start gap-4">
+              {channel?.logo ? (
+                <img 
+                  src={channel.logo} 
+                  alt={channel.name} 
+                  referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    // If logo fails to load, replace with dummy text initials
+                    e.currentTarget.style.display = "none";
+                  }}
+                  className="w-14 h-14 object-contain rounded-xl bg-[#050505] border border-neutral-800 p-1 bg-white/5"
+                />
+              ) : (
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-red-600 to-red-950 flex items-center justify-center font-bold text-white text-xl font-sans italic">
+                  {channel?.name?.slice(0, 2).toUpperCase()}
+                </div>
+              )}
+              
+              <div>
+                <div className="flex items-center gap-2 mb-1 flex-wrap">
+                  <span className="px-2.5 py-0.5 bg-red-600/10 text-red-500 text-[10px] font-mono rounded-full font-bold uppercase tracking-wider">
+                    {channel?.group || "Sports"}
+                  </span>
+                  <span className="flex items-center gap-1.5 text-xs text-red-500 font-semibold animate-pulse font-sans">
+                    <span className="w-1.5 h-1.5 bg-red-600 rounded-full animate-ping"></span>
+                    {t.liveBadge}
+                  </span>
+                  {servers.length > 1 && (
+                    <span className="px-2 py-0.5 bg-red-950/70 border border-red-800/50 text-red-300 text-[10px] font-mono rounded-full flex items-center gap-1">
+                      <Radio className="w-2.5 h-2.5 text-red-400 animate-pulse" />
+                      <span>{servers.length} {lang === "bn" ? "টি সার্ভার" : "Servers"}</span>
+                    </span>
+                  )}
+                </div>
+                <h2 className="text-xl font-black text-white font-sans tracking-tight">
+                  {channel?.name}
+                </h2>
+              </div>
+            </div>
+
+            {/* Current Active Server indicator pill */}
+            {currentServer && servers.length > 1 && (
+              <div className="flex items-center gap-2 bg-neutral-900/80 border border-neutral-800 px-3.5 py-2 rounded-xl text-xs font-mono text-neutral-300 self-start md:self-auto shadow-inner">
+                <span className="text-neutral-500 font-sans text-[11px]">{lang === "bn" ? "চলমান সার্ভার:" : "Playing:"}</span>
+                <span className="text-red-400 font-bold flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  {currentServer.label || `Server ${activeServerIndex + 1}`}
+                </span>
               </div>
             )}
-            
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="px-2.5 py-0.5 bg-red-600/10 text-red-500 text-[10px] font-mono rounded-full font-bold uppercase tracking-wider">
-                  {channel?.group || "Sports"}
-                </span>
-                <span className="flex items-center gap-1.5 text-xs text-red-500 font-semibold animate-pulse font-sans">
-                  <span className="w-1.5 h-1.5 bg-red-600 rounded-full animate-ping"></span>
-                  {t.liveBadge}
+          </div>
+
+          {/* DEDICATED LIVE STREAM SERVER SWITCHER */}
+          {servers.length > 1 && (
+            <div className="mt-1 pt-4 border-t border-neutral-850 flex flex-col gap-3">
+              <div className="flex items-center justify-between flex-wrap gap-2">
+                <div className="flex items-center gap-2">
+                  <Server className="w-4 h-4 text-red-500" />
+                  <span className="text-xs sm:text-sm font-black text-white uppercase tracking-wider font-sans">
+                    {lang === "bn" ? "লাইভ সার্ভারসমূহ (সার্ভার পরিবর্তন করতে ক্লিক করুন):" : "Available Live Servers:"}
+                  </span>
+                </div>
+                <span className="text-[11px] font-sans text-neutral-400 bg-neutral-900 border border-neutral-800 px-2.5 py-0.5 rounded-full">
+                  {lang === "bn" ? `মোট ${servers.length}টি সার্ভার সংযুক্ত` : `${servers.length} Servers Online`}
                 </span>
               </div>
-              <h2 className="text-xl font-black text-white font-sans tracking-tight">
-                {channel?.name}
-              </h2>
+
+              {/* Server Switching Buttons */}
+              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                {servers.map((srv, idx) => {
+                  const isCurrent = activeServerIndex === idx;
+                  return (
+                    <button
+                      key={srv.server_num || idx}
+                      onClick={() => handleSwitchServer(idx)}
+                      className={`px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 active:scale-95 cursor-pointer font-sans shadow-md ${
+                        isCurrent
+                          ? "bg-red-600 text-white shadow-red-600/30 ring-2 ring-red-500 border border-red-400"
+                          : "bg-neutral-900 hover:bg-neutral-800 text-neutral-200 border border-neutral-800 hover:border-neutral-700"
+                      }`}
+                    >
+                      <span className={`w-2.5 h-2.5 rounded-full flex items-center justify-center ${
+                        isCurrent ? "bg-white animate-pulse" : "bg-neutral-600"
+                      }`} />
+                      <span className="tracking-wide">{srv.label}</span>
+                      {srv.quality && (
+                        <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded uppercase font-bold ${
+                          isCurrent ? "bg-red-950 text-red-200 border border-red-800/60" : "bg-neutral-950 text-neutral-400 border border-neutral-800"
+                        }`}>
+                          {srv.quality}
+                        </span>
+                      )}
+                      {isCurrent && (
+                        <span className="text-[10px] font-sans px-1.5 py-0.5 rounded bg-white/20 text-white font-extrabold uppercase">
+                          {lang === "bn" ? "চালু" : "Active"}
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Informative Guidance */}
+              <p className="text-[11px] text-neutral-400 flex items-center gap-1.5 font-sans pt-1">
+                <span className="text-red-500 font-bold">💡</span>
+                <span>
+                  {lang === "bn" 
+                    ? "যদি বর্তমান সার্ভারটিতে বাফারিং বা লোডিং সমস্যা দেখা দেয়, তবে ওপরের অন্য যেকোনো সার্ভার বোতামে ক্লিক করে সাথে সাথে খেলা উপভোগ করুন।" 
+                    : "If you experience buffering or lag on the current server, click another server button above to switch streams instantly."}
+                </span>
+              </p>
             </div>
-          </div>
+          )}
         </div>
       )}
 

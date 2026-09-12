@@ -4,8 +4,8 @@
 # Website: https://ireentv.pages.dev
 # Developer: MD ANAMUL HOQUE
 # Version: 2.0
-# Channels Amount: 378
-# Last Update: 2026-09-12 11:59:34 UTC
+# Channels Amount: 380
+# Last Update: 2026-09-12 18:08:35 UTC
 
 #EXTINF:-1 tvg-id="Combined_M3U_0_aHR0cHM6" tvg-name="IreenTV Promo" tvg-logo="https://i.ibb.co.com/XkDv6gpS/ireenTV.png" group-title="Bangla",IreenTV Promo
 https://ireentv.pages.dev/IreenTV_Promo.m3u8
@@ -1060,6 +1060,9 @@ https://ireentv.pages.dev/Pogo.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_449_aHR0cHM6" tvg-name="PBS Kids" tvg-logo="https://i.imgur.com/ubZMeQv.jpg" group-title="Kids",PBS Kids
 https://ireentv.pages.dev/PBS_Kids.m3u8
 
+#EXTINF:-1 tvg-id="Combined_M3U_450_aHR0cHM6" tvg-name="ZB Cartoon" tvg-logo="https://i.postimg.cc/FFwSjdzS/Pogo.jpg" group-title="Kids",ZB Cartoon
+https://ireentv.pages.dev/ZB_Cartoon.m3u8
+
 #EXTINF:-1 tvg-id="Combined_M3U_451_aHR0cHM6" tvg-name="Jungle Book" tvg-logo="https://i.imgur.com/ubZMeQv.jpg" group-title="Kids",Jungle Book
 https://ireentv.pages.dev/Jungle_Book.m3u8
 
@@ -1074,6 +1077,9 @@ https://ireentv.pages.dev/Tom__Jerry_TV.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_455_aHR0cHM6" tvg-name="Bantul The Great" tvg-logo="https://upload.wikimedia.org/wikipedia/en/a/a1/Bantul_The_Great_logo.jpeg" group-title="Kids",Bantul The Great
 https://ireentv.pages.dev/Bantul_The_Great.m3u8
+
+#EXTINF:-1 tvg-id="Combined_M3U_456_aHR0cHM6" tvg-name="Cartoon Network" tvg-logo="https://otapp.store/uploads/tv_image/sm/cartoon-network-hindi.png" group-title="Kids",Cartoon Network
+https://ireentv.pages.dev/Cartoon_Network.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_457_aHR0cHM6" tvg-name="Nickelodeon" tvg-logo="https://s3.aynaott.com/storage/bb2375af2d1ff8666f2c24fbcec3c541" group-title="Kids",Nickelodeon
 https://ireentv.pages.dev/Nickelodeon.m3u8

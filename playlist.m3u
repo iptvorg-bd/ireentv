@@ -4,8 +4,8 @@
 # Website: https://ireentv.pages.dev
 # Developer: MD ANAMUL HOQUE
 # Version: 2.0
-# Channels Amount: 1020
-# Last Update: 2026-10-27 03:18:57 UTC
+# Channels Amount: 1029
+# Last Update: 2026-10-27 11:26:11 UTC
 
 #EXTINF:-1 tvg-id="Combined_M3U_0_aHR0cHM6" tvg-name="IreenTV Promo" tvg-logo="https://i.ibb.co.com/XkDv6gpS/ireenTV.png" group-title="Bangla",IreenTV Promo
 https://ireentv.pages.dev/IreenTV_Promo.m3u8
@@ -40,11 +40,14 @@ https://ireentv.pages.dev/ATN_BANGLA_HD_Server_1.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_11_aHR0cDov" tvg-name="ATN BANGLA HD Server 2" tvg-logo="https://i.postimg.cc/pXTP3Vty/20260918-105226.png" group-title="Bangla",ATN BANGLA HD Server 2
 https://ireentv.pages.dev/ATN_BANGLA_HD_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_13_aHR0cDov" tvg-name="ATN BANGLA HD Server 3" tvg-logo="https://i.postimg.cc/pXTP3Vty/20260918-105226.png" group-title="Bangla",ATN BANGLA HD Server 3
+#EXTINF:-1 tvg-id="Combined_M3U_12_aHR0cHM6" tvg-name="ATN BANGLA HD Server 3" tvg-logo="https://i.postimg.cc/pXTP3Vty/20260918-105226.png" group-title="Bangla",ATN BANGLA HD Server 3
 https://ireentv.pages.dev/ATN_BANGLA_HD_Server_3.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_14_aHR0cDov" tvg-name="ATN BANGLA HD Server 4" tvg-logo="https://i.postimg.cc/pXTP3Vty/20260918-105226.png" group-title="Bangla",ATN BANGLA HD Server 4
+#EXTINF:-1 tvg-id="Combined_M3U_13_aHR0cDov" tvg-name="ATN BANGLA HD Server 4" tvg-logo="https://i.postimg.cc/pXTP3Vty/20260918-105226.png" group-title="Bangla",ATN BANGLA HD Server 4
 https://ireentv.pages.dev/ATN_BANGLA_HD_Server_4.m3u8
+
+#EXTINF:-1 tvg-id="Combined_M3U_14_aHR0cDov" tvg-name="ATN BANGLA HD Server 5" tvg-logo="https://i.postimg.cc/pXTP3Vty/20260918-105226.png" group-title="Bangla",ATN BANGLA HD Server 5
+https://ireentv.pages.dev/ATN_BANGLA_HD_Server_5.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_15_aHR0cHM6" tvg-name="Atn News Server 1" tvg-logo="" group-title="General",Atn News Server 1
 https://ireentv.pages.dev/Atn_News_Server_1.m3u8
@@ -60,9 +63,6 @@ https://ireentv.pages.dev/ATN_UK_Server_1.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_19_aHR0cHM6" tvg-name="ATN UK Server 2" tvg-logo="https://i.ytimg.com/vi/GRCWbI5ZSFg/maxresdefault.jpg" group-title="Bangla",ATN UK Server 2
 https://ireentv.pages.dev/ATN_UK_Server_2.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_20_aHR0cHM6" tvg-name="Ayna TV" tvg-logo="https://i.ibb.co.com/5hy7S3wB/Ayna-TV.png" group-title="Bangla",Ayna TV
-https://ireentv.pages.dev/Ayna_TV.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_21_aHR0cHM6" tvg-name="Bangla TV Server 1" tvg-logo="https://i.postimg.cc/15jySx9q/20260918-105617.png" group-title="Bangla",Bangla TV Server 1
 https://ireentv.pages.dev/Bangla_TV_Server_1.m3u8
@@ -115,11 +115,8 @@ https://ireentv.pages.dev/Channel_1_Server_1.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_40_aHR0cDov" tvg-name="Channel 1 Server 2" tvg-logo="https://i.postimg.cc/QdKhx6tn/20260918-110445.png" group-title="Bangla",Channel 1 Server 2
 https://ireentv.pages.dev/Channel_1_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_41_aHR0cDov" tvg-name="Channel 1 Server 3" tvg-logo="https://i.postimg.cc/QdKhx6tn/20260918-110445.png" group-title="Bangla",Channel 1 Server 3
+#EXTINF:-1 tvg-id="Combined_M3U_42_aHR0cHM6" tvg-name="Channel 1 Server 3" tvg-logo="https://i.postimg.cc/QdKhx6tn/20260918-110445.png" group-title="Bangla",Channel 1 Server 3
 https://ireentv.pages.dev/Channel_1_Server_3.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_42_aHR0cHM6" tvg-name="Channel 1 Server 4" tvg-logo="https://i.postimg.cc/QdKhx6tn/20260918-110445.png" group-title="Bangla",Channel 1 Server 4
-https://ireentv.pages.dev/Channel_1_Server_4.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_43_aHR0cHM6" tvg-name="Channel 16 Server 1" tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGN4JrZ3Ur3BHiD2tQhsQq3WQ5DXpv7HATFyNDT6o-rSNwAZaeQieMBdfPoGPio5UPipGV2ZBb8rLmyYJe5vySfQjEmTE5MLc_6q8CKfXuzb4eRQREjPiyL5tkncb1Xt5pVMJa6t77CT98JvAFozg95IH_9qofXJ2s1ubKCbJ-_JsuRVb458aBztLImQ/s1080/1000015295.png" group-title="Bangla Music",Channel 16 Server 1
 https://ireentv.pages.dev/Channel_16_Server_1.m3u8
@@ -187,20 +184,17 @@ https://ireentv.pages.dev/DesheBideshe_TV.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_68_aHR0cHM6" tvg-name="Deshi TV HD" tvg-logo="https://i.postimg.cc/t4cxjxRj/Deshi-TV.jpg" group-title="Bangla",Deshi TV HD
 https://ireentv.pages.dev/Deshi_TV_HD.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_69_aHR0cDov" tvg-name="Duronto TV Server 1" tvg-logo="https://i.postimg.cc/J73yRzgj/Duronto-tv.png" group-title="Kids",Duronto TV Server 1
+#EXTINF:-1 tvg-id="Combined_M3U_71_aHR0cDov" tvg-name="Duronto TV Server 1" tvg-logo="https://i.postimg.cc/J73yRzgj/Duronto-tv.png" group-title="Kids",Duronto TV Server 1
 https://ireentv.pages.dev/Duronto_TV_Server_1.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_71_aHR0cDov" tvg-name="Duronto TV Server 2" tvg-logo="https://i.postimg.cc/J73yRzgj/Duronto-tv.png" group-title="Kids",Duronto TV Server 2
+#EXTINF:-1 tvg-id="Combined_M3U_72_aHR0cDov" tvg-name="Duronto TV Server 2" tvg-logo="https://i.postimg.cc/J73yRzgj/Duronto-tv.png" group-title="Kids",Duronto TV Server 2
 https://ireentv.pages.dev/Duronto_TV_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_72_aHR0cDov" tvg-name="Duronto TV Server 3" tvg-logo="https://i.postimg.cc/J73yRzgj/Duronto-tv.png" group-title="Kids",Duronto TV Server 3
+#EXTINF:-1 tvg-id="Combined_M3U_73_aHR0cDov" tvg-name="Duronto TV Server 3" tvg-logo="https://i.postimg.cc/J73yRzgj/Duronto-tv.png" group-title="Kids",Duronto TV Server 3
 https://ireentv.pages.dev/Duronto_TV_Server_3.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_73_aHR0cDov" tvg-name="Duronto TV Server 4" tvg-logo="https://i.postimg.cc/J73yRzgj/Duronto-tv.png" group-title="Kids",Duronto TV Server 4
+#EXTINF:-1 tvg-id="Combined_M3U_74_aHR0cDov" tvg-name="Duronto TV Server 4" tvg-logo="https://i.postimg.cc/J73yRzgj/Duronto-tv.png" group-title="Kids",Duronto TV Server 4
 https://ireentv.pages.dev/Duronto_TV_Server_4.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_74_aHR0cDov" tvg-name="Duronto TV Server 5" tvg-logo="https://i.postimg.cc/J73yRzgj/Duronto-tv.png" group-title="Kids",Duronto TV Server 5
-https://ireentv.pages.dev/Duronto_TV_Server_5.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_75_aHR0cHM6" tvg-name="Ekattor TV Server 1" tvg-logo="https://tstatic.akash-go.com/cms-ui/images/custom-content/1739963327549.png" group-title="Bangla",Ekattor TV Server 1
 https://ireentv.pages.dev/Ekattor_TV_Server_1.m3u8
@@ -247,14 +241,17 @@ https://ireentv.pages.dev/EPTV_HD.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_89_aHR0cHM6" tvg-name="G-Serise" tvg-logo="https://raw.githubusercontent.com/BadhanStrom/img/refs/heads/main/G-Series_Logo.png" group-title="Bangla",G-Serise
 https://ireentv.pages.dev/G-Serise.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_91_aHR0cDov" tvg-name="GAZI TV Server 1" tvg-logo="https://i.postimg.cc/63cN1gjc/20260918-142530.png" group-title="Bangla",GAZI TV Server 1
+#EXTINF:-1 tvg-id="Combined_M3U_90_aHR0cHM6" tvg-name="GAZI TV Server 1" tvg-logo="https://i.postimg.cc/63cN1gjc/20260918-142530.png" group-title="Bangla",GAZI TV Server 1
 https://ireentv.pages.dev/GAZI_TV_Server_1.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_92_aHR0cDov" tvg-name="GAZI TV Server 2" tvg-logo="https://i.postimg.cc/63cN1gjc/20260918-142530.png" group-title="Bangla",GAZI TV Server 2
+#EXTINF:-1 tvg-id="Combined_M3U_91_aHR0cDov" tvg-name="GAZI TV Server 2" tvg-logo="https://i.postimg.cc/63cN1gjc/20260918-142530.png" group-title="Bangla",GAZI TV Server 2
 https://ireentv.pages.dev/GAZI_TV_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_93_aHR0cDov" tvg-name="GAZI TV Server 3" tvg-logo="https://i.postimg.cc/63cN1gjc/20260918-142530.png" group-title="Bangla",GAZI TV Server 3
+#EXTINF:-1 tvg-id="Combined_M3U_92_aHR0cDov" tvg-name="GAZI TV Server 3" tvg-logo="https://i.postimg.cc/63cN1gjc/20260918-142530.png" group-title="Bangla",GAZI TV Server 3
 https://ireentv.pages.dev/GAZI_TV_Server_3.m3u8
+
+#EXTINF:-1 tvg-id="Combined_M3U_93_aHR0cDov" tvg-name="GAZI TV Server 4" tvg-logo="https://i.postimg.cc/63cN1gjc/20260918-142530.png" group-title="Bangla",GAZI TV Server 4
+https://ireentv.pages.dev/GAZI_TV_Server_4.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_94_aHR0cHM6" tvg-name="Global TV Server 1" tvg-logo="https://i.postimg.cc/rsyqVMRc/20260917-203512.png" group-title="Bangla",Global TV Server 1
 https://ireentv.pages.dev/Global_TV_Server_1.m3u8
@@ -274,8 +271,11 @@ https://ireentv.pages.dev/Green_tv_Server_1.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_99_aHR0cHM6" tvg-name="Green tv Server 2" tvg-logo="https://s3.aynaott.com/storage/499219599639007120dc540bdc6e7d9d" group-title="Bangla",Green tv Server 2
 https://ireentv.pages.dev/Green_tv_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_101_aHR0cDov" tvg-name="Independent TV Server 1" tvg-logo="https://tstatic.akash-go.com/cms-ui/images/custom-content/1778087037971.png" group-title="Bangla",Independent TV Server 1
+#EXTINF:-1 tvg-id="Combined_M3U_100_aHR0cHM6" tvg-name="Independent TV Server 1" tvg-logo="https://tstatic.akash-go.com/cms-ui/images/custom-content/1778087037971.png" group-title="Bangla",Independent TV Server 1
 https://ireentv.pages.dev/Independent_TV_Server_1.m3u8
+
+#EXTINF:-1 tvg-id="Combined_M3U_101_aHR0cDov" tvg-name="Independent TV Server 2" tvg-logo="https://tstatic.akash-go.com/cms-ui/images/custom-content/1778087037971.png" group-title="Bangla",Independent TV Server 2
+https://ireentv.pages.dev/Independent_TV_Server_2.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_102_aHR0cHM6" tvg-name="Jago News 24 Server 1" tvg-logo="https://i.ibb.co.com/KpRt3cT5/Jago-News-24.png" group-title="Bangla",Jago News 24 Server 1
 https://ireentv.pages.dev/Jago_News_24_Server_1.m3u8
@@ -304,14 +304,17 @@ https://ireentv.pages.dev/JaTV.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_110_aHR0cHM6" tvg-name="MAASRANGA HD Server 1" tvg-logo="https://i.postimg.cc/8CWpwygm/20260917-185459.png" group-title="Bangla",MAASRANGA HD Server 1
 https://ireentv.pages.dev/MAASRANGA_HD_Server_1.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_112_aHR0cHM6" tvg-name="MAASRANGA HD Server 2" tvg-logo="https://i.postimg.cc/8CWpwygm/20260917-185459.png" group-title="Bangla",MAASRANGA HD Server 2
+#EXTINF:-1 tvg-id="Combined_M3U_111_aHR0cHM6" tvg-name="MAASRANGA HD Server 2" tvg-logo="https://i.postimg.cc/8CWpwygm/20260917-185459.png" group-title="Bangla",MAASRANGA HD Server 2
 https://ireentv.pages.dev/MAASRANGA_HD_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_113_aHR0cDov" tvg-name="MAASRANGA HD Server 3" tvg-logo="https://i.postimg.cc/8CWpwygm/20260917-185459.png" group-title="Bangla",MAASRANGA HD Server 3
+#EXTINF:-1 tvg-id="Combined_M3U_112_aHR0cHM6" tvg-name="MAASRANGA HD Server 3" tvg-logo="https://i.postimg.cc/8CWpwygm/20260917-185459.png" group-title="Bangla",MAASRANGA HD Server 3
 https://ireentv.pages.dev/MAASRANGA_HD_Server_3.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_114_aHR0cDov" tvg-name="MAASRANGA HD Server 4" tvg-logo="https://i.postimg.cc/8CWpwygm/20260917-185459.png" group-title="Bangla",MAASRANGA HD Server 4
+#EXTINF:-1 tvg-id="Combined_M3U_113_aHR0cDov" tvg-name="MAASRANGA HD Server 4" tvg-logo="https://i.postimg.cc/8CWpwygm/20260917-185459.png" group-title="Bangla",MAASRANGA HD Server 4
 https://ireentv.pages.dev/MAASRANGA_HD_Server_4.m3u8
+
+#EXTINF:-1 tvg-id="Combined_M3U_114_aHR0cDov" tvg-name="MAASRANGA HD Server 5" tvg-logo="https://i.postimg.cc/8CWpwygm/20260917-185459.png" group-title="Bangla",MAASRANGA HD Server 5
+https://ireentv.pages.dev/MAASRANGA_HD_Server_5.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_115_aHR0cDov" tvg-name="Matribhumi TV" tvg-logo="https://raw.githubusercontent.com/iptv-org/api/master/data/categories/no-logo.png" group-title="Bangla",Matribhumi TV
 https://ireentv.pages.dev/Matribhumi_TV.m3u8
@@ -382,17 +385,17 @@ https://ireentv.pages.dev/NRB.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_137_aHR0cHM6" tvg-name="NTV Server 1" tvg-logo="https://i.postimg.cc/bJgjFWCb/20260918-142451.png" group-title="Bangla",NTV Server 1
 https://ireentv.pages.dev/NTV_Server_1.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_139_aHR0cDov" tvg-name="NTV Server 2" tvg-logo="https://i.postimg.cc/bJgjFWCb/20260918-142451.png" group-title="Bangla",NTV Server 2
+#EXTINF:-1 tvg-id="Combined_M3U_138_aHR0cHM6" tvg-name="NTV Server 2" tvg-logo="https://i.postimg.cc/bJgjFWCb/20260918-142451.png" group-title="Bangla",NTV Server 2
 https://ireentv.pages.dev/NTV_Server_2.m3u8
+
+#EXTINF:-1 tvg-id="Combined_M3U_139_aHR0cDov" tvg-name="NTV Server 3" tvg-logo="https://i.postimg.cc/bJgjFWCb/20260918-142451.png" group-title="Bangla",NTV Server 3
+https://ireentv.pages.dev/NTV_Server_3.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_140_aHR0cHM6" tvg-name="NTV UK" tvg-logo="https://i.postimg.cc/bJgjFWCb/20260918-142451.png" group-title="Bangla",NTV UK
 https://ireentv.pages.dev/NTV_UK.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_141_aHR0cHM6" tvg-name="Rajdhani TV Server 1" tvg-logo="https://i.imgur.com/MBm2gPz.jpeg" group-title="Bangla",Rajdhani TV Server 1
-https://ireentv.pages.dev/Rajdhani_TV_Server_1.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_142_aHR0cHM6" tvg-name="Rajdhani TV Server 2" tvg-logo="https://i.imgur.com/MBm2gPz.jpeg" group-title="Bangla",Rajdhani TV Server 2
-https://ireentv.pages.dev/Rajdhani_TV_Server_2.m3u8
+#EXTINF:-1 tvg-id="Combined_M3U_142_aHR0cHM6" tvg-name="Rajdhani TV" tvg-logo="https://i.imgur.com/MBm2gPz.jpeg" group-title="Bangla",Rajdhani TV
+https://ireentv.pages.dev/Rajdhani_TV.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_143_aHR0cHM6" tvg-name="RTV Server 1" tvg-logo="https://i.postimg.cc/L5sMdDw7/20260918-142828.png" group-title="Bangla",RTV Server 1
 https://ireentv.pages.dev/RTV_Server_1.m3u8
@@ -439,11 +442,8 @@ https://ireentv.pages.dev/Somoy_TV_Server_5.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_157_aHR0cDov" tvg-name="Somoy TV Server 6" tvg-logo="https://i.postimg.cc/FznXhcQZ/20260918-143603.png" group-title="Bangla",Somoy TV Server 6
 https://ireentv.pages.dev/Somoy_TV_Server_6.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_158_aHR0cHM6" tvg-name="SRK TV Server 1" tvg-logo="https://tstatic.akash-go.com/cms-ui/images/custom-content/1746005940155.png" group-title="Bangla",SRK TV Server 1
-https://ireentv.pages.dev/SRK_TV_Server_1.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_159_aHR0cHM6" tvg-name="SRK TV Server 2" tvg-logo="https://tstatic.akash-go.com/cms-ui/images/custom-content/1746005940155.png" group-title="Bangla",SRK TV Server 2
-https://ireentv.pages.dev/SRK_TV_Server_2.m3u8
+#EXTINF:-1 tvg-id="Combined_M3U_159_aHR0cHM6" tvg-name="SRK TV" tvg-logo="https://tstatic.akash-go.com/cms-ui/images/custom-content/1746005940155.png" group-title="Bangla",SRK TV
+https://ireentv.pages.dev/SRK_TV.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_161_aHR0cHM6" tvg-name="T Sports HD Server 1" tvg-logo="https://i.postimg.cc/fLcbW8HQ/20260917-182941.png" group-title="Sports",T Sports HD Server 1
 https://ireentv.pages.dev/T_Sports_HD_Server_1.m3u8
@@ -451,26 +451,20 @@ https://ireentv.pages.dev/T_Sports_HD_Server_1.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_162_aHR0cDov" tvg-name="T Sports HD Server 2" tvg-logo="https://i.postimg.cc/fLcbW8HQ/20260917-182941.png" group-title="Sports",T Sports HD Server 2
 https://ireentv.pages.dev/T_Sports_HD_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_163_aHR0cDov" tvg-name="T Sports HD Server 3" tvg-logo="https://i.postimg.cc/fLcbW8HQ/20260917-182941.png" group-title="Sports",T Sports HD Server 3
+#EXTINF:-1 tvg-id="Combined_M3U_164_aHR0cHM6" tvg-name="T Sports HD Server 3" tvg-logo="https://i.postimg.cc/fLcbW8HQ/20260917-182941.png" group-title="Sports",T Sports HD Server 3
 https://ireentv.pages.dev/T_Sports_HD_Server_3.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_164_aHR0cHM6" tvg-name="T Sports HD Server 4" tvg-logo="https://i.postimg.cc/fLcbW8HQ/20260917-182941.png" group-title="Sports",T Sports HD Server 4
+#EXTINF:-1 tvg-id="Combined_M3U_169_aHR0cHM6" tvg-name="T Sports HD Server 4" tvg-logo="https://i.postimg.cc/fLcbW8HQ/20260917-182941.png" group-title="Sports",T Sports HD Server 4
 https://ireentv.pages.dev/T_Sports_HD_Server_4.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_169_aHR0cHM6" tvg-name="T Sports HD Server 5" tvg-logo="https://i.postimg.cc/fLcbW8HQ/20260917-182941.png" group-title="Sports",T Sports HD Server 5
+#EXTINF:-1 tvg-id="Combined_M3U_170_aHR0cDov" tvg-name="T Sports HD Server 5" tvg-logo="https://i.postimg.cc/fLcbW8HQ/20260917-182941.png" group-title="Sports",T Sports HD Server 5
 https://ireentv.pages.dev/T_Sports_HD_Server_5.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_170_aHR0cDov" tvg-name="T Sports HD Server 6" tvg-logo="https://i.postimg.cc/fLcbW8HQ/20260917-182941.png" group-title="Sports",T Sports HD Server 6
+#EXTINF:-1 tvg-id="Combined_M3U_171_aHR0cDov" tvg-name="T Sports HD Server 6" tvg-logo="https://i.postimg.cc/fLcbW8HQ/20260917-182941.png" group-title="Sports",T Sports HD Server 6
 https://ireentv.pages.dev/T_Sports_HD_Server_6.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_171_aHR0cDov" tvg-name="T Sports HD Server 7" tvg-logo="https://i.postimg.cc/fLcbW8HQ/20260917-182941.png" group-title="Sports",T Sports HD Server 7
-https://ireentv.pages.dev/T_Sports_HD_Server_7.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_172_aHR0cHM6" tvg-name="Thikana TV Server 1" tvg-logo="https://imglink.cc/cdn/rw8iAU9ZcB.jpg" group-title="Bangla",Thikana TV Server 1
-https://ireentv.pages.dev/Thikana_TV_Server_1.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_173_aHR0cHM6" tvg-name="Thikana TV Server 2" tvg-logo="https://imglink.cc/cdn/rw8iAU9ZcB.jpg" group-title="Bangla",Thikana TV Server 2
-https://ireentv.pages.dev/Thikana_TV_Server_2.m3u8
+#EXTINF:-1 tvg-id="Combined_M3U_173_aHR0cHM6" tvg-name="Thikana TV" tvg-logo="https://imglink.cc/cdn/rw8iAU9ZcB.jpg" group-title="Bangla",Thikana TV
+https://ireentv.pages.dev/Thikana_TV.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_174_aHR0cHM6" tvg-name="VISION 24🇧🇩" tvg-logo="" group-title="Bangla",VISION 24🇧🇩
 https://ireentv.pages.dev/VISION_24.m3u8
@@ -502,14 +496,11 @@ https://ireentv.pages.dev/Color_Bangla_Cinema_Server_3.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_185_aHR0cDov" tvg-name="Color Bangla Cinema Server 4" tvg-logo="https://i.ibb.co.com/vxg5pDdJ/Colors-Bangla-Cinema.png" group-title="Movies",Color Bangla Cinema Server 4
 https://ireentv.pages.dev/Color_Bangla_Cinema_Server_4.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_186_aHR0cDov" tvg-name="Colors Bangla Server 1" tvg-logo="https://i.ibb.co.com/2p677yw/Colors-Bangla-logo-svg.webp" group-title="Bangla",Colors Bangla Server 1
+#EXTINF:-1 tvg-id="Combined_M3U_187_aHR0cDov" tvg-name="Colors Bangla Server 1" tvg-logo="https://i.ibb.co.com/2p677yw/Colors-Bangla-logo-svg.webp" group-title="Bangla",Colors Bangla Server 1
 https://ireentv.pages.dev/Colors_Bangla_Server_1.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_187_aHR0cDov" tvg-name="Colors Bangla Server 2" tvg-logo="https://i.ibb.co.com/2p677yw/Colors-Bangla-logo-svg.webp" group-title="Bangla",Colors Bangla Server 2
+#EXTINF:-1 tvg-id="Combined_M3U_188_aHR0cDov" tvg-name="Colors Bangla Server 2" tvg-logo="https://i.ibb.co.com/2p677yw/Colors-Bangla-logo-svg.webp" group-title="Bangla",Colors Bangla Server 2
 https://ireentv.pages.dev/Colors_Bangla_Server_2.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_188_aHR0cDov" tvg-name="Colors Bangla Server 3" tvg-logo="https://i.ibb.co.com/2p677yw/Colors-Bangla-logo-svg.webp" group-title="Bangla",Colors Bangla Server 3
-https://ireentv.pages.dev/Colors_Bangla_Server_3.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_189_aHR0cDov" tvg-name="Enter 10 Bangla Server 1" tvg-logo="https://raw.githubusercontent.com/subirkumarpaul/Logo/main/Enter%2010%20Bangla.jpeg" group-title="Bangla",Enter 10 Bangla Server 1
 https://ireentv.pages.dev/Enter_10_Bangla_Server_1.m3u8
@@ -574,20 +565,17 @@ https://ireentv.pages.dev/Sony_Aath_Server_3.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_214_aHR0cDov" tvg-name="STAR BANGLA" tvg-logo="https://pbs.twimg.com/profile_images/675064828294258688/Cw-KocM0_400x400.jpg" group-title="Bangla",STAR BANGLA
 https://ireentv.pages.dev/STAR_BANGLA.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_215_aHR0cDov" tvg-name="Star Jalsha Server 1" tvg-logo="https://i.imgur.com/IlufzR5.png" group-title="Bangla",Star Jalsha Server 1
+#EXTINF:-1 tvg-id="Combined_M3U_216_aHR0cHM6" tvg-name="Star Jalsha Server 1" tvg-logo="https://i.imgur.com/IlufzR5.png" group-title="Bangla",Star Jalsha Server 1
 https://ireentv.pages.dev/Star_Jalsha_Server_1.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_216_aHR0cHM6" tvg-name="Star Jalsha Server 2" tvg-logo="https://i.imgur.com/IlufzR5.png" group-title="Bangla",Star Jalsha Server 2
+#EXTINF:-1 tvg-id="Combined_M3U_218_aHR0cDov" tvg-name="Star Jalsha Server 2" tvg-logo="https://i.imgur.com/IlufzR5.png" group-title="Bangla",Star Jalsha Server 2
 https://ireentv.pages.dev/Star_Jalsha_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_218_aHR0cDov" tvg-name="Star Jalsha Server 3" tvg-logo="https://i.imgur.com/IlufzR5.png" group-title="Bangla",Star Jalsha Server 3
+#EXTINF:-1 tvg-id="Combined_M3U_220_aHR0cDov" tvg-name="Star Jalsha Server 3" tvg-logo="https://i.imgur.com/IlufzR5.png" group-title="Bangla",Star Jalsha Server 3
 https://ireentv.pages.dev/Star_Jalsha_Server_3.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_220_aHR0cDov" tvg-name="Star Jalsha Server 4" tvg-logo="https://i.imgur.com/IlufzR5.png" group-title="Bangla",Star Jalsha Server 4
+#EXTINF:-1 tvg-id="Combined_M3U_221_aHR0cDov" tvg-name="Star Jalsha Server 4" tvg-logo="https://i.imgur.com/IlufzR5.png" group-title="Bangla",Star Jalsha Server 4
 https://ireentv.pages.dev/Star_Jalsha_Server_4.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_221_aHR0cDov" tvg-name="Star Jalsha Server 5" tvg-logo="https://i.imgur.com/IlufzR5.png" group-title="Bangla",Star Jalsha Server 5
-https://ireentv.pages.dev/Star_Jalsha_Server_5.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_223_aHR0cDov" tvg-name="Sun Bangla Server 1" tvg-logo="https://i.ibb.co.com/0Vr6dQCx/Sun-Bangla-HD-logo-2023.webp" group-title="Bangla",Sun Bangla Server 1
 https://ireentv.pages.dev/Sun_Bangla_Server_1.m3u8
@@ -607,14 +595,11 @@ https://ireentv.pages.dev/Time_Televis_HD.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_228_aHR0cHM6" tvg-name="TV9 Bangla" tvg-logo="https://images.tv9bangla.com/wp-content/themes/tv9bangla/images/tv9-bangla-logo.svg" group-title="Bangla",TV9 Bangla
 https://ireentv.pages.dev/TV9_Bangla.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_229_aHR0cDov" tvg-name="Zee Bangla HD Server 1" tvg-logo="https://i.postimg.cc/zvf1m76p/20260918-142751.png" group-title="Bangla",Zee Bangla HD Server 1
+#EXTINF:-1 tvg-id="Combined_M3U_230_aHR0cDov" tvg-name="Zee Bangla HD Server 1" tvg-logo="https://i.postimg.cc/zvf1m76p/20260918-142751.png" group-title="Bangla",Zee Bangla HD Server 1
 https://ireentv.pages.dev/Zee_Bangla_HD_Server_1.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_230_aHR0cDov" tvg-name="Zee Bangla HD Server 2" tvg-logo="https://i.postimg.cc/zvf1m76p/20260918-142751.png" group-title="Bangla",Zee Bangla HD Server 2
+#EXTINF:-1 tvg-id="Combined_M3U_232_aHR0cHM6" tvg-name="Zee Bangla HD Server 2" tvg-logo="https://i.postimg.cc/zvf1m76p/20260918-142751.png" group-title="Bangla",Zee Bangla HD Server 2
 https://ireentv.pages.dev/Zee_Bangla_HD_Server_2.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_232_aHR0cHM6" tvg-name="Zee Bangla HD Server 3" tvg-logo="https://i.postimg.cc/zvf1m76p/20260918-142751.png" group-title="Bangla",Zee Bangla HD Server 3
-https://ireentv.pages.dev/Zee_Bangla_HD_Server_3.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_234_aHR0cHM6" tvg-name="Zee Bangla Server 1" tvg-logo="https://i.postimg.cc/zvf1m76p/20260918-142751.png" group-title="Bangla",Zee Bangla Server 1
 https://ireentv.pages.dev/Zee_Bangla_Server_1.m3u8
@@ -844,11 +829,8 @@ https://ireentv.pages.dev/Star_Plus_Server_2.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_329_aHR0cDov" tvg-name="Star Plus Server 3" tvg-logo="https://i.ibb.co.com/RTsxJDrx/Star-Plus-HD.png" group-title="Hindi",Star Plus Server 3
 https://ireentv.pages.dev/Star_Plus_Server_3.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_330_aHR0cDov" tvg-name="STAR GOLD SELECT HD Server 1" tvg-logo="https://i.ibb.co.com/spn4T6Kq/STS.jpg" group-title="Hindi Movies",STAR GOLD SELECT HD Server 1
-https://ireentv.pages.dev/STAR_GOLD_SELECT_HD_Server_1.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_331_aHR0cDov" tvg-name="STAR GOLD SELECT HD Server 2" tvg-logo="https://i.ibb.co.com/spn4T6Kq/STS.jpg" group-title="Hindi Movies",STAR GOLD SELECT HD Server 2
-https://ireentv.pages.dev/STAR_GOLD_SELECT_HD_Server_2.m3u8
+#EXTINF:-1 tvg-id="Combined_M3U_331_aHR0cDov" tvg-name="STAR GOLD SELECT HD" tvg-logo="https://i.ibb.co.com/spn4T6Kq/STS.jpg" group-title="Hindi Movies",STAR GOLD SELECT HD
+https://ireentv.pages.dev/STAR_GOLD_SELECT_HD.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_332_aHR0cHM6" tvg-name="ZEE ACTION" tvg-logo="https://ah-media-eug.pages.dev/logos/ZeeAction.png" group-title="Hindi Movies",ZEE ACTION
 https://ireentv.pages.dev/ZEE_ACTION.m3u8
@@ -1114,14 +1096,11 @@ https://ireentv.pages.dev/Made_in_Hollywood.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_438_aHR0cDov" tvg-name="MNX FHD" tvg-logo="https://i.ibb.co.com/7JTW6kcw/j5Hfx-S.png" group-title="Movies",MNX FHD
 https://ireentv.pages.dev/MNX_FHD.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_439_aHR0cDov" tvg-name="MOVIES NOW Server 1" tvg-logo="https://i.ibb.co.com/RT7Y4FKF/MOVIES-NOW.png" group-title="Movies",MOVIES NOW Server 1
+#EXTINF:-1 tvg-id="Combined_M3U_440_aHR0cDov" tvg-name="MOVIES NOW Server 1" tvg-logo="https://i.ibb.co.com/RT7Y4FKF/MOVIES-NOW.png" group-title="Movies",MOVIES NOW Server 1
 https://ireentv.pages.dev/MOVIES_NOW_Server_1.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_440_aHR0cDov" tvg-name="MOVIES NOW Server 2" tvg-logo="https://i.ibb.co.com/RT7Y4FKF/MOVIES-NOW.png" group-title="Movies",MOVIES NOW Server 2
+#EXTINF:-1 tvg-id="Combined_M3U_441_aHR0cDov" tvg-name="MOVIES NOW Server 2" tvg-logo="https://i.ibb.co.com/RT7Y4FKF/MOVIES-NOW.png" group-title="Movies",MOVIES NOW Server 2
 https://ireentv.pages.dev/MOVIES_NOW_Server_2.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_441_aHR0cDov" tvg-name="MOVIES NOW Server 3" tvg-logo="https://i.ibb.co.com/RT7Y4FKF/MOVIES-NOW.png" group-title="Movies",MOVIES NOW Server 3
-https://ireentv.pages.dev/MOVIES_NOW_Server_3.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_442_aHR0cHM6" tvg-name="Movies Thriller" tvg-logo="https://i.imgur.com/JWihdcl.png" group-title="Movies",Movies Thriller
 https://ireentv.pages.dev/Movies_Thriller.m3u8
@@ -1168,14 +1147,17 @@ https://ireentv.pages.dev/Yes_Movies_Action_HD_Server_1.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_457_aHR0cDov" tvg-name="Yes Movies Action HD Server 2" tvg-logo="https://i.ibb.co.com/rKntnjVH/2966.png" group-title="Movies",Yes Movies Action HD Server 2
 https://ireentv.pages.dev/Yes_Movies_Action_HD_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_459_aHR0cHM6" tvg-name="Sony Ten Cricket Server 1" tvg-logo="https://i.postimg.cc/0yzwt46Q/20241126-220214.png" group-title="Sports",Sony Ten Cricket Server 1
+#EXTINF:-1 tvg-id="Combined_M3U_458_aHR0cDov" tvg-name="Sony Ten Cricket Server 1" tvg-logo="https://i.postimg.cc/0yzwt46Q/20241126-220214.png" group-title="Sports",Sony Ten Cricket Server 1
 https://ireentv.pages.dev/Sony_Ten_Cricket_Server_1.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_460_aHR0cDov" tvg-name="Sony Ten Cricket Server 2" tvg-logo="https://i.postimg.cc/0yzwt46Q/20241126-220214.png" group-title="Sports",Sony Ten Cricket Server 2
+#EXTINF:-1 tvg-id="Combined_M3U_459_aHR0cHM6" tvg-name="Sony Ten Cricket Server 2" tvg-logo="https://i.postimg.cc/0yzwt46Q/20241126-220214.png" group-title="Sports",Sony Ten Cricket Server 2
 https://ireentv.pages.dev/Sony_Ten_Cricket_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_461_aHR0cHM6" tvg-name="Sony Ten Cricket Server 3" tvg-logo="https://i.postimg.cc/0yzwt46Q/20241126-220214.png" group-title="Sports",Sony Ten Cricket Server 3
+#EXTINF:-1 tvg-id="Combined_M3U_460_aHR0cDov" tvg-name="Sony Ten Cricket Server 3" tvg-logo="https://i.postimg.cc/0yzwt46Q/20241126-220214.png" group-title="Sports",Sony Ten Cricket Server 3
 https://ireentv.pages.dev/Sony_Ten_Cricket_Server_3.m3u8
+
+#EXTINF:-1 tvg-id="Combined_M3U_461_aHR0cHM6" tvg-name="Sony Ten Cricket Server 4" tvg-logo="https://i.postimg.cc/0yzwt46Q/20241126-220214.png" group-title="Sports",Sony Ten Cricket Server 4
+https://ireentv.pages.dev/Sony_Ten_Cricket_Server_4.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_463_aHR0cHM6" tvg-name="WILLOW CRICKET HD Server 1" tvg-logo="https://images.fubo.tv/channel-config-ui/station-logos/on-dark/willow_sports_stacked_logo_full_white.png" group-title="Sports",WILLOW CRICKET HD Server 1
 https://ireentv.pages.dev/WILLOW_CRICKET_HD_Server_1.m3u8
@@ -1198,17 +1180,17 @@ https://ireentv.pages.dev/SKY_SPORTS_CRICKET_HD_Server_2.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_469_aHR0cHM6" tvg-name="ASTRO CRICBUZ Server 1" tvg-logo="https://i.postimg.cc/s2pz5v54/20260918-111431.png" group-title="Sports",ASTRO CRICBUZ Server 1
 https://ireentv.pages.dev/ASTRO_CRICBUZ_Server_1.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_471_aHR0cHM6" tvg-name="ASTRO CRICBUZ Server 2" tvg-logo="https://i.postimg.cc/s2pz5v54/20260918-111431.png" group-title="Sports",ASTRO CRICBUZ Server 2
+#EXTINF:-1 tvg-id="Combined_M3U_470_aHR0cDov" tvg-name="ASTRO CRICBUZ Server 2" tvg-logo="https://i.postimg.cc/s2pz5v54/20260918-111431.png" group-title="Sports",ASTRO CRICBUZ Server 2
 https://ireentv.pages.dev/ASTRO_CRICBUZ_Server_2.m3u8
+
+#EXTINF:-1 tvg-id="Combined_M3U_471_aHR0cHM6" tvg-name="ASTRO CRICBUZ Server 3" tvg-logo="https://i.postimg.cc/s2pz5v54/20260918-111431.png" group-title="Sports",ASTRO CRICBUZ Server 3
+https://ireentv.pages.dev/ASTRO_CRICBUZ_Server_3.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_472_aHR0cHM6" tvg-name="Ten Sports HD Server 1" tvg-logo="https://i.postimg.cc/Gp0rBkTj/20260918-111219.png" group-title="Sports",Ten Sports HD Server 1
 https://ireentv.pages.dev/Ten_Sports_HD_Server_1.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_473_aHR0cHM6" tvg-name="Ten Sports HD Server 2" tvg-logo="https://i.postimg.cc/Gp0rBkTj/20260918-111219.png" group-title="Sports",Ten Sports HD Server 2
 https://ireentv.pages.dev/Ten_Sports_HD_Server_2.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_474_aHR0cDov" tvg-name="Ten Sports HD Server 3" tvg-logo="https://i.postimg.cc/Gp0rBkTj/20260918-111219.png" group-title="Sports",Ten Sports HD Server 3
-https://ireentv.pages.dev/Ten_Sports_HD_Server_3.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_475_aHR0cHM6" tvg-name="Ten Sports SD" tvg-logo="https://i.postimg.cc/Gp0rBkTj/20260918-111219.png" group-title="Sports",Ten Sports SD
 https://ireentv.pages.dev/Ten_Sports_SD.m3u8
@@ -1333,16 +1315,13 @@ https://ireentv.pages.dev/Star_Sports_1_Server_2.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_518_aHR0cDov" tvg-name="Star Sports 1 Server 3" tvg-logo="https://i.postimg.cc/hGFgJ9Qm/20260918-110842.png" group-title="Sports",Star Sports 1 Server 3
 https://ireentv.pages.dev/Star_Sports_1_Server_3.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_519_aHR0cHM6" tvg-name="Star Sports 1 Server 4" tvg-logo="https://i.postimg.cc/hGFgJ9Qm/20260918-110842.png" group-title="Sports",Star Sports 1 Server 4
+#EXTINF:-1 tvg-id="Combined_M3U_522_aHR0cDov" tvg-name="Star Sports 1 Server 4" tvg-logo="https://i.postimg.cc/hGFgJ9Qm/20260918-110842.png" group-title="Sports",Star Sports 1 Server 4
 https://ireentv.pages.dev/Star_Sports_1_Server_4.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_522_aHR0cDov" tvg-name="Star Sports 1 Server 5" tvg-logo="https://i.postimg.cc/hGFgJ9Qm/20260918-110842.png" group-title="Sports",Star Sports 1 Server 5
-https://ireentv.pages.dev/Star_Sports_1_Server_5.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_524_aHR0cHM6" tvg-name="Star Sports 2 Server 1" tvg-logo="https://i.ibb.co.com/kV7KtjH0/star2.png" group-title="Sports",Star Sports 2 Server 1
+#EXTINF:-1 tvg-id="Combined_M3U_523_aHR0cHM6" tvg-name="Star Sports 2 Server 1" tvg-logo="https://i.ibb.co.com/kV7KtjH0/star2.png" group-title="Sports",Star Sports 2 Server 1
 https://ireentv.pages.dev/Star_Sports_2_Server_1.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_525_aHR0cHM6" tvg-name="Star Sports 2 Server 2" tvg-logo="https://i.ibb.co.com/kV7KtjH0/star2.png" group-title="Sports",Star Sports 2 Server 2
+#EXTINF:-1 tvg-id="Combined_M3U_524_aHR0cHM6" tvg-name="Star Sports 2 Server 2" tvg-logo="https://i.ibb.co.com/kV7KtjH0/star2.png" group-title="Sports",Star Sports 2 Server 2
 https://ireentv.pages.dev/Star_Sports_2_Server_2.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_526_aHR0cHM6" tvg-name="Star Sports 2 Server 3" tvg-logo="https://i.ibb.co.com/kV7KtjH0/star2.png" group-title="Sports",Star Sports 2 Server 3
@@ -1360,11 +1339,8 @@ https://ireentv.pages.dev/Star_Sports_Select_1_Server_1.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_533_aHR0cHM6" tvg-name="Star Sports Select 1 Server 2" tvg-logo="https://i.postimg.cc/mrxRcQ17/20260918-111059.png" group-title="Sports",Star Sports Select 1 Server 2
 https://ireentv.pages.dev/Star_Sports_Select_1_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_535_aHR0cHM6" tvg-name="Star Sports Select 1 Server 3" tvg-logo="https://i.postimg.cc/mrxRcQ17/20260918-111059.png" group-title="Sports",Star Sports Select 1 Server 3
+#EXTINF:-1 tvg-id="Combined_M3U_536_aHR0cDov" tvg-name="Star Sports Select 1 Server 3" tvg-logo="https://i.postimg.cc/mrxRcQ17/20260918-111059.png" group-title="Sports",Star Sports Select 1 Server 3
 https://ireentv.pages.dev/Star_Sports_Select_1_Server_3.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_536_aHR0cDov" tvg-name="Star Sports Select 1 Server 4" tvg-logo="https://i.postimg.cc/mrxRcQ17/20260918-111059.png" group-title="Sports",Star Sports Select 1 Server 4
-https://ireentv.pages.dev/Star_Sports_Select_1_Server_4.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_537_aHR0cHM6" tvg-name="Star Sports Select 2 Server 1" tvg-logo="https://i.postimg.cc/rmczbb8g/20240825_060019.png" group-title="Sports",Star Sports Select 2 Server 1
 https://ireentv.pages.dev/Star_Sports_Select_2_Server_1.m3u8
@@ -1375,14 +1351,8 @@ https://ireentv.pages.dev/Star_Sports_Select_2_Server_2.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_539_aHR0cDov" tvg-name="Star Sports Select 2 Server 3" tvg-logo="https://i.postimg.cc/rmczbb8g/20240825_060019.png" group-title="Sports",Star Sports Select 2 Server 3
 https://ireentv.pages.dev/Star_Sports_Select_2_Server_3.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_540_aHR0cHM6" tvg-name="Star Sports Select 2 Server 4" tvg-logo="https://i.postimg.cc/rmczbb8g/20240825_060019.png" group-title="Sports",Star Sports Select 2 Server 4
-https://ireentv.pages.dev/Star_Sports_Select_2_Server_4.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_542_aHR0cHM6" tvg-name="EUROSPORTS HD Server 1" tvg-logo="https://assets-prod.services.toffeelive.com/Uy6Q-JQBv9knK3AHcDUQ/posters/01709bcd-6d53-4710-a64f-bc49cecf1d61.webp" group-title="Sports",EUROSPORTS HD Server 1
-https://ireentv.pages.dev/EUROSPORTS_HD_Server_1.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_543_aHR0cHM6" tvg-name="EUROSPORTS HD Server 2" tvg-logo="https://assets-prod.services.toffeelive.com/Uy6Q-JQBv9knK3AHcDUQ/posters/01709bcd-6d53-4710-a64f-bc49cecf1d61.webp" group-title="Sports",EUROSPORTS HD Server 2
-https://ireentv.pages.dev/EUROSPORTS_HD_Server_2.m3u8
+#EXTINF:-1 tvg-id="Combined_M3U_542_aHR0cHM6" tvg-name="EUROSPORTS HD" tvg-logo="https://assets-prod.services.toffeelive.com/Uy6Q-JQBv9knK3AHcDUQ/posters/01709bcd-6d53-4710-a64f-bc49cecf1d61.webp" group-title="Sports",EUROSPORTS HD
+https://ireentv.pages.dev/EUROSPORTS_HD.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_544_aHR0cHM6" tvg-name="Sony Ten Sports 1 Server 1" tvg-logo="https://images.toffeelive.com/images/program/603/logo/240x240/mobile_logo_237244001666780563.png" group-title="Sports",Sony Ten Sports 1 Server 1
 https://ireentv.pages.dev/Sony_Ten_Sports_1_Server_1.m3u8
@@ -1405,17 +1375,11 @@ https://ireentv.pages.dev/Sony_Ten_Sports_2_Server_1.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_551_aHR0cHM6" tvg-name="Sony Ten Sports 2 Server 2" tvg-logo="https://images.toffeelive.com/images/program/604/logo/240x240/mobile_logo_093449001666780976.png" group-title="Sports",Sony Ten Sports 2 Server 2
 https://ireentv.pages.dev/Sony_Ten_Sports_2_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_552_aHR0cDov" tvg-name="Sony Ten Sports 2 Server 3" tvg-logo="https://images.toffeelive.com/images/program/604/logo/240x240/mobile_logo_093449001666780976.png" group-title="Sports",Sony Ten Sports 2 Server 3
+#EXTINF:-1 tvg-id="Combined_M3U_555_aHR0cHM6" tvg-name="Sony Ten Sports 2 Server 3" tvg-logo="https://images.toffeelive.com/images/program/604/logo/240x240/mobile_logo_093449001666780976.png" group-title="Sports",Sony Ten Sports 2 Server 3
 https://ireentv.pages.dev/Sony_Ten_Sports_2_Server_3.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_553_aHR0cHM6" tvg-name="Sony Ten Sports 2 Server 4" tvg-logo="https://images.toffeelive.com/images/program/604/logo/240x240/mobile_logo_093449001666780976.png" group-title="Sports",Sony Ten Sports 2 Server 4
+#EXTINF:-1 tvg-id="Combined_M3U_557_aHR0cDov" tvg-name="Sony Ten Sports 2 Server 4" tvg-logo="https://images.toffeelive.com/images/program/604/logo/240x240/mobile_logo_093449001666780976.png" group-title="Sports",Sony Ten Sports 2 Server 4
 https://ireentv.pages.dev/Sony_Ten_Sports_2_Server_4.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_555_aHR0cHM6" tvg-name="Sony Ten Sports 2 Server 5" tvg-logo="https://images.toffeelive.com/images/program/604/logo/240x240/mobile_logo_093449001666780976.png" group-title="Sports",Sony Ten Sports 2 Server 5
-https://ireentv.pages.dev/Sony_Ten_Sports_2_Server_5.m3u8
-
-#EXTINF:-1 tvg-id="Combined_M3U_557_aHR0cDov" tvg-name="Sony Ten Sports 2 Server 6" tvg-logo="https://images.toffeelive.com/images/program/604/logo/240x240/mobile_logo_093449001666780976.png" group-title="Sports",Sony Ten Sports 2 Server 6
-https://ireentv.pages.dev/Sony_Ten_Sports_2_Server_6.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_558_aHR0cHM6" tvg-name="Sony Ten Sports 3 Server 1" tvg-logo="https://images.toffeelive.com/images/program/2418/logo/240x240/mobile_logo_992280001666781086.png" group-title="Sports",Sony Ten Sports 3 Server 1
 https://ireentv.pages.dev/Sony_Ten_Sports_3_Server_1.m3u8
@@ -1423,8 +1387,11 @@ https://ireentv.pages.dev/Sony_Ten_Sports_3_Server_1.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_559_aHR0cHM6" tvg-name="Sony Ten Sports 3 Server 2" tvg-logo="https://images.toffeelive.com/images/program/2418/logo/240x240/mobile_logo_992280001666781086.png" group-title="Sports",Sony Ten Sports 3 Server 2
 https://ireentv.pages.dev/Sony_Ten_Sports_3_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_563_aHR0cDov" tvg-name="Sony Ten Sports 3 Server 3" tvg-logo="https://images.toffeelive.com/images/program/2418/logo/240x240/mobile_logo_992280001666781086.png" group-title="Sports",Sony Ten Sports 3 Server 3
+#EXTINF:-1 tvg-id="Combined_M3U_560_aHR0cDov" tvg-name="Sony Ten Sports 3 Server 3" tvg-logo="https://images.toffeelive.com/images/program/2418/logo/240x240/mobile_logo_992280001666781086.png" group-title="Sports",Sony Ten Sports 3 Server 3
 https://ireentv.pages.dev/Sony_Ten_Sports_3_Server_3.m3u8
+
+#EXTINF:-1 tvg-id="Combined_M3U_563_aHR0cDov" tvg-name="Sony Ten Sports 3 Server 4" tvg-logo="https://images.toffeelive.com/images/program/2418/logo/240x240/mobile_logo_992280001666781086.png" group-title="Sports",Sony Ten Sports 3 Server 4
+https://ireentv.pages.dev/Sony_Ten_Sports_3_Server_4.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_564_aHR0cHM6" tvg-name="Sony Ten Sports 5 Server 1" tvg-logo="https://images.toffeelive.com/images/program/606/logo/240x240/mobile_logo_689539001672145843.png" group-title="Sports",Sony Ten Sports 5 Server 1
 https://ireentv.pages.dev/Sony_Ten_Sports_5_Server_1.m3u8
@@ -1681,8 +1648,11 @@ https://ireentv.pages.dev/Discovery_Server_1.m3u8
 #EXTINF:-1 tvg-id="Combined_M3U_659_aHR0cHM6" tvg-name="Discovery Server 2" tvg-logo="https://i.ibb.co.com/9kkTKjFS/di2.png" group-title="Documentary",Discovery Server 2
 https://ireentv.pages.dev/Discovery_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Combined_M3U_662_aHR0cDov" tvg-name="Discovery Bangla" tvg-logo="https://i.ibb.co.com/9kkTKjFS/di2.png" group-title="Documentary",Discovery Bangla
-https://ireentv.pages.dev/Discovery_Bangla.m3u8
+#EXTINF:-1 tvg-id="Combined_M3U_660_aHR0cDov" tvg-name="Discovery Bangla Server 1" tvg-logo="https://i.ibb.co.com/9kkTKjFS/di2.png" group-title="Documentary",Discovery Bangla Server 1
+https://ireentv.pages.dev/Discovery_Bangla_Server_1.m3u8
+
+#EXTINF:-1 tvg-id="Combined_M3U_662_aHR0cDov" tvg-name="Discovery Bangla Server 2" tvg-logo="https://i.ibb.co.com/9kkTKjFS/di2.png" group-title="Documentary",Discovery Bangla Server 2
+https://ireentv.pages.dev/Discovery_Bangla_Server_2.m3u8
 
 #EXTINF:-1 tvg-id="Combined_M3U_663_aHR0cDov" tvg-name="Nat Geo Wild Server 1" tvg-logo="https://iptvx.one/picons/nat-geo-wild.png" group-title="Documentary",Nat Geo Wild Server 1
 https://ireentv.pages.dev/Nat_Geo_Wild_Server_1.m3u8
@@ -1723,6 +1693,9 @@ https://ireentv.pages.dev/Ananda_TV_Backup_3.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_6_aHR0cDov" tvg-name="Asian TV [Backup 1]" tvg-logo="https://i.imgur.com/k2adSjA.png" group-title="Bangladesh",Asian TV [Backup 1]
 https://ireentv.pages.dev/Asian_TV_Backup_1.m3u8
 
+#EXTINF:-1 tvg-id="Example_M3U_1_10_aHR0cDov" tvg-name="ATN Bangla [Backup 1]" tvg-logo="https://i.imgur.com/K1HmMRz.png" group-title="Bangladesh",ATN Bangla [Backup 1]
+https://ireentv.pages.dev/ATN_Bangla_Backup_1.m3u8
+
 #EXTINF:-1 tvg-id="Example_M3U_1_11_aHR0cHM6" tvg-name="ATN Bangla [Backup 2]" tvg-logo="https://i.imgur.com/K1HmMRz.png" group-title="Bangladesh",ATN Bangla [Backup 2]
 https://ireentv.pages.dev/ATN_Bangla_Backup_2.m3u8
 
@@ -1750,9 +1723,6 @@ https://ireentv.pages.dev/Channel_1_Backup_1.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_38_aHR0cDov" tvg-name="Channel 16 Server 2" tvg-logo="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGN4JrZ3Ur3BHiD2tQhsQq3WQ5DXpv7HATFyNDT6o-rSNwAZaeQieMBdfPoGPio5UPipGV2ZBb8rLmyYJe5vySfQjEmTE5MLc_6q8CKfXuzb4eRQREjPiyL5tkncb1Xt5pVMJa6t77CT98JvAFozg95IH_9qofXJ2s1ubKCbJ-_JsuRVb458aBztLImQ/s1080/1000015295.png" group-title="Bangladesh",Channel 16 Server 2
 https://ireentv.pages.dev/Channel_16_Server_2.m3u8
 
-#EXTINF:-1 tvg-id="Example_M3U_1_41_aHR0cDov" tvg-name="Channel 24 [Backup 1]" tvg-logo="https://i.imgur.com/4JLkaF7.png" group-title="Bangladesh",Channel 24 [Backup 1]
-https://ireentv.pages.dev/Channel_24_Backup_1.m3u8
-
 #EXTINF:-1 tvg-id="Example_M3U_1_43_aHR0cHM6" tvg-name="Channel 24 [Backup 3]" tvg-logo="https://i.imgur.com/4JLkaF7.png" group-title="Bangladesh",Channel 24 [Backup 3]
 https://ireentv.pages.dev/Channel_24_Backup_3.m3u8
 
@@ -1777,8 +1747,8 @@ https://ireentv.pages.dev/Doyel_TV.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_65_aHR0cHM6" tvg-name="DTV USA" tvg-logo="https://yt3.ggpht.com/b5k6hzCSHAsvrPtt5xJXMMZb3GpciGCZRRWyXb4Xs7roWL1SK62R58XTi5PTx2ShAb3buqTOHfE=s512-c-k-c0x00ffffff-no-rj" group-title="Bangladesh",DTV USA
 https://ireentv.pages.dev/DTV_USA.m3u8
 
-#EXTINF:-1 tvg-id="Example_M3U_1_66_aHR0cHM6" tvg-name="Duronto TV Server 6" tvg-logo="https://i.postimg.cc/0QRKCsfQ/20240823_020937.png" group-title="Bangladesh",Duronto TV Server 6
-https://ireentv.pages.dev/Duronto_TV_Server_6.m3u8
+#EXTINF:-1 tvg-id="Example_M3U_1_66_aHR0cHM6" tvg-name="Duronto TV Server 5" tvg-logo="https://i.postimg.cc/0QRKCsfQ/20240823_020937.png" group-title="Bangladesh",Duronto TV Server 5
+https://ireentv.pages.dev/Duronto_TV_Server_5.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_70_aHR0cDov" tvg-name="Ekattor TV [Backup 1]" tvg-logo="https://i.imgur.com/zoLwwUK.png" group-title="Bangladesh",Ekattor TV [Backup 1]
 https://ireentv.pages.dev/Ekattor_TV_Backup_1.m3u8
@@ -1804,14 +1774,11 @@ https://ireentv.pages.dev/Ekushey_TV_Backup_5.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_86_aHR0cHM6" tvg-name="G Series Drama" tvg-logo="https://upload.wikimedia.org/wikipedia/en/c/ce/G-Series_Logo.png" group-title="Bangladesh",G Series Drama
 https://ireentv.pages.dev/G_Series_Drama.m3u8
 
-#EXTINF:-1 tvg-id="Example_M3U_1_87_aHR0cHM6" tvg-name="Gazi TV Server 4" tvg-logo="https://i.imgur.com/2Lzhiq6.png" group-title="Bangladesh",Gazi TV Server 4
-https://ireentv.pages.dev/Gazi_TV_Server_4.m3u8
+#EXTINF:-1 tvg-id="Example_M3U_1_87_aHR0cHM6" tvg-name="Gazi TV Server 5" tvg-logo="https://i.imgur.com/2Lzhiq6.png" group-title="Bangladesh",Gazi TV Server 5
+https://ireentv.pages.dev/Gazi_TV_Server_5.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_91_aHR0cDov" tvg-name="Global TV Server 5" tvg-logo="https://raw.githubusercontent.com/subirkumarpaul/Logo/main/Global%20Television%20Bangladesh.png" group-title="Bangladesh",Global TV Server 5
 https://ireentv.pages.dev/Global_TV_Server_5.m3u8
-
-#EXTINF:-1 tvg-id="Example_M3U_1_92_aHR0cDov" tvg-name="Global TV [Backup 1]" tvg-logo="https://raw.githubusercontent.com/subirkumarpaul/Logo/main/Global%20Television%20Bangladesh.png" group-title="Bangladesh",Global TV [Backup 1]
-https://ireentv.pages.dev/Global_TV_Backup_1.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_93_aHR0cDov" tvg-name="Global TV [Backup 2]" tvg-logo="https://raw.githubusercontent.com/subirkumarpaul/Logo/main/Global%20Television%20Bangladesh.png" group-title="Bangladesh",Global TV [Backup 2]
 https://ireentv.pages.dev/Global_TV_Backup_2.m3u8
@@ -1822,8 +1789,8 @@ https://ireentv.pages.dev/Green_TV_Server_3.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_98_aHR0cDov" tvg-name="Green TV [Backup 2]" tvg-logo="https://i.postimg.cc/ry4QcVbh/20240822-231240.png" group-title="Bangladesh",Green TV [Backup 2]
 https://ireentv.pages.dev/Green_TV_Backup_2.m3u8
 
-#EXTINF:-1 tvg-id="Example_M3U_1_100_aHR0cDov" tvg-name="Independent TV Server 2" tvg-logo="https://i.imgur.com/POXFhGN.png" group-title="Bangladesh",Independent TV Server 2
-https://ireentv.pages.dev/Independent_TV_Server_2.m3u8
+#EXTINF:-1 tvg-id="Example_M3U_1_100_aHR0cDov" tvg-name="Independent TV Server 3" tvg-logo="https://i.imgur.com/POXFhGN.png" group-title="Bangladesh",Independent TV Server 3
+https://ireentv.pages.dev/Independent_TV_Server_3.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_101_aHR0cHM6" tvg-name="Independent TV [Backup 1]" tvg-logo="https://i.imgur.com/POXFhGN.png" group-title="Bangladesh",Independent TV [Backup 1]
 https://ireentv.pages.dev/Independent_TV_Backup_1.m3u8
@@ -1867,11 +1834,14 @@ https://ireentv.pages.dev/News_21_Bangla_TV.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_133_aHR0cHM6" tvg-name="News 24 [Backup 1]" tvg-logo="https://i.imgur.com/fkTHh75.png" group-title="Bangladesh",News 24 [Backup 1]
 https://ireentv.pages.dev/News_24_Backup_1.m3u8
 
-#EXTINF:-1 tvg-id="Example_M3U_1_137_aHR0cHM6" tvg-name="NTV Server 3" tvg-logo="https://i.imgur.com/l75bDTx.png" group-title="Bangladesh",NTV Server 3
-https://ireentv.pages.dev/NTV_Server_3.m3u8
+#EXTINF:-1 tvg-id="Example_M3U_1_137_aHR0cHM6" tvg-name="NTV Server 4" tvg-logo="https://i.imgur.com/l75bDTx.png" group-title="Bangladesh",NTV Server 4
+https://ireentv.pages.dev/NTV_Server_4.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_141_aHR0cHM6" tvg-name="NTV Europe" tvg-logo="https://europentv.ntvbd.com/sites/all/themes/sloth/logo.png" group-title="Bangladesh",NTV Europe
 https://ireentv.pages.dev/NTV_Europe.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_143_aHR0cDov" tvg-name="RTV Server 7" tvg-logo="https://i.imgur.com/yu8ugqt.png" group-title="Bangladesh",RTV Server 7
+https://ireentv.pages.dev/RTV_Server_7.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_145_aHR0cDov" tvg-name="RTV [Backup 2]" tvg-logo="https://i.imgur.com/yu8ugqt.png" group-title="Bangladesh",RTV [Backup 2]
 https://ireentv.pages.dev/RTV_Backup_2.m3u8
@@ -1888,6 +1858,9 @@ https://ireentv.pages.dev/SA_TV_Backup_1.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_151_aHR0cHM6" tvg-name="Somoy TV Server 7" tvg-logo="https://i.imgur.com/i54AQic.png" group-title="Bangladesh",Somoy TV Server 7
 https://ireentv.pages.dev/Somoy_TV_Server_7.m3u8
 
+#EXTINF:-1 tvg-id="Example_M3U_1_152_aHR0cHM6" tvg-name="Somoy TV [Backup 1]" tvg-logo="https://i.imgur.com/i54AQic.png" group-title="Bangladesh",Somoy TV [Backup 1]
+https://ireentv.pages.dev/Somoy_TV_Backup_1.m3u8
+
 #EXTINF:-1 tvg-id="Example_M3U_1_159_aHR0cDov" tvg-name="TBN24" tvg-logo="https://i.imgur.com/m5naptG.png" group-title="Bangladesh",TBN24
 https://ireentv.pages.dev/TBN24.m3u8
 
@@ -1899,6 +1872,9 @@ https://ireentv.pages.dev/US-BD_Journal_24_TV.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_164_aHR0cHM6" tvg-name="Aakaash Aath" tvg-logo="https://dtil.tmsimg.com/assets/s142510_ld_h15_ab.png?lock=720x540" group-title="Indian Bangla",Aakaash Aath
 https://ireentv.pages.dev/Aakaash_Aath.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_165_aHR0cDov" tvg-name="Aakaash Aath [Backup 1]" tvg-logo="https://dtil.tmsimg.com/assets/s142510_ld_h15_ab.png?lock=720x540" group-title="Indian Bangla",Aakaash Aath [Backup 1]
+https://ireentv.pages.dev/Aakaash_Aath_Backup_1.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_167_aHR0cHM6" tvg-name="Alankar TV" tvg-logo="https://dtil.tmsimg.com/assets/s142630_ld_h15_aa.png?lock=720x540" group-title="Indian Bangla",Alankar TV
 https://ireentv.pages.dev/Alankar_TV.m3u8
@@ -1918,8 +1894,11 @@ https://ireentv.pages.dev/Amar_Bangla_Digital_Backup_1.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_173_aHR0cHM6" tvg-name="BHI Channel" tvg-logo="https://bhichannel.com/favicon.ico" group-title="Indian Bangla",BHI Channel
 https://ireentv.pages.dev/BHI_Channel.m3u8
 
-#EXTINF:-1 tvg-id="Example_M3U_1_174_aHR0cHM6" tvg-name="Colors Bangla Server 4" tvg-logo="https://dtil.tmsimg.com/assets/s157577_ld_h15_aa.png?lock=720x540" group-title="Indian Bangla",Colors Bangla Server 4
-https://ireentv.pages.dev/Colors_Bangla_Server_4.m3u8
+#EXTINF:-1 tvg-id="Example_M3U_1_174_aHR0cHM6" tvg-name="Colors Bangla Server 3" tvg-logo="https://dtil.tmsimg.com/assets/s157577_ld_h15_aa.png?lock=720x540" group-title="Indian Bangla",Colors Bangla Server 3
+https://ireentv.pages.dev/Colors_Bangla_Server_3.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_175_aHR0cDov" tvg-name="Colors Bangla [Backup 1]" tvg-logo="https://dtil.tmsimg.com/assets/s157577_ld_h15_aa.png?lock=720x540" group-title="Indian Bangla",Colors Bangla [Backup 1]
+https://ireentv.pages.dev/Colors_Bangla_Backup_1.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_176_aHR0cHM6" tvg-name="Colors Bangla [Backup 2]" tvg-logo="https://dtil.tmsimg.com/assets/s157577_ld_h15_aa.png?lock=720x540" group-title="Indian Bangla",Colors Bangla [Backup 2]
 https://ireentv.pages.dev/Colors_Bangla_Backup_2.m3u8
@@ -1996,11 +1975,14 @@ https://ireentv.pages.dev/Sony_AATH_Server_4.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_208_aHR0cHM6" tvg-name="Sony AATH [Backup 1]" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG002YP08L.png?lock=720x540" group-title="Indian Bangla",Sony AATH [Backup 1]
 https://ireentv.pages.dev/Sony_AATH_Backup_1.m3u8
 
+#EXTINF:-1 tvg-id="Example_M3U_1_209_aHR0cDov" tvg-name="Sony AATH [Backup 2]" tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG002YP08L.png?lock=720x540" group-title="Indian Bangla",Sony AATH [Backup 2]
+https://ireentv.pages.dev/Sony_AATH_Backup_2.m3u8
+
 #EXTINF:-1 tvg-id="Example_M3U_1_212_aHR0cDov" tvg-name="Star Jalsha [Backup 1]" tvg-logo="https://dtil.tmsimg.com/assets/s143819_ld_h15_aa.png?lock=720x540" group-title="Indian Bangla",Star Jalsha [Backup 1]
 https://ireentv.pages.dev/Star_Jalsha_Backup_1.m3u8
 
-#EXTINF:-1 tvg-id="Example_M3U_1_214_aHR0cHM6" tvg-name="Star Jalsha [Backup 3]" tvg-logo="https://dtil.tmsimg.com/assets/s143819_ld_h15_aa.png?lock=720x540" group-title="Indian Bangla",Star Jalsha [Backup 3]
-https://ireentv.pages.dev/Star_Jalsha_Backup_3.m3u8
+#EXTINF:-1 tvg-id="Example_M3U_1_213_aHR0cDov" tvg-name="Star Jalsha [Backup 2]" tvg-logo="https://dtil.tmsimg.com/assets/s143819_ld_h15_aa.png?lock=720x540" group-title="Indian Bangla",Star Jalsha [Backup 2]
+https://ireentv.pages.dev/Star_Jalsha_Backup_2.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_215_aHR0cDov" tvg-name="Star Jalsha [Backup 4]" tvg-logo="https://dtil.tmsimg.com/assets/s143819_ld_h15_aa.png?lock=720x540" group-title="Indian Bangla",Star Jalsha [Backup 4]
 https://ireentv.pages.dev/Star_Jalsha_Backup_4.m3u8
@@ -2032,8 +2014,8 @@ https://ireentv.pages.dev/Zee_Bangla_Cinema_Backup_1.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_227_aHR0cHM6" tvg-name="Zee Bangla Cinema [Backup 2]" tvg-logo="https://i.postimg.cc/dtBRtL99/20240822_231732.png" group-title="Indian Bangla",Zee Bangla Cinema [Backup 2]
 https://ireentv.pages.dev/Zee_Bangla_Cinema_Backup_2.m3u8
 
-#EXTINF:-1 tvg-id="Example_M3U_1_228_aHR0cHM6" tvg-name="Zee Bangla HD Server 4" tvg-logo="https://i.postimg.cc/5tjSrbLS/20240822-231445.png" group-title="Indian Bangla",Zee Bangla HD Server 4
-https://ireentv.pages.dev/Zee_Bangla_HD_Server_4.m3u8
+#EXTINF:-1 tvg-id="Example_M3U_1_228_aHR0cHM6" tvg-name="Zee Bangla HD Server 3" tvg-logo="https://i.postimg.cc/5tjSrbLS/20240822-231445.png" group-title="Indian Bangla",Zee Bangla HD Server 3
+https://ireentv.pages.dev/Zee_Bangla_HD_Server_3.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_232_aHR0cHM6" tvg-name="B4U Kadak" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/B4U-Kadak-BLACK-transparent.png" group-title="Indian Movies",B4U Kadak
 https://ireentv.pages.dev/B4U_Kadak.m3u8
@@ -2059,9 +2041,6 @@ https://ireentv.pages.dev/Bollywood_OLD.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_241_aHR0cHM6" tvg-name="Goldmines" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Goldmines%20Logo_Transparent.png" group-title="Indian Movies",Goldmines
 https://ireentv.pages.dev/Goldmines.m3u8
 
-#EXTINF:-1 tvg-id="Example_M3U_1_242_aHR0cHM6" tvg-name="Goldmines [Backup 1]" tvg-logo="https://ltsk-cdn.s3.eu-west-1.amazonaws.com/jumpstart/Temp_Live/cdn/HLS/Channel/transparentImages/Goldmines%20Logo_Transparent.png" group-title="Indian Movies",Goldmines [Backup 1]
-https://ireentv.pages.dev/Goldmines_Backup_1.m3u8
-
 #EXTINF:-1 tvg-id="Example_M3U_1_243_aHR0cHM6" tvg-name="Goldmines Bollywood" tvg-logo="https://i.imgur.com/6mNQ9mM.png" group-title="Indian Movies",Goldmines Bollywood
 https://ireentv.pages.dev/Goldmines_Bollywood.m3u8
 
@@ -2070,9 +2049,6 @@ https://ireentv.pages.dev/Goldmines_Bollywood_Backup_1.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_246_aHR0cHM6" tvg-name="Goldmines Movies" tvg-logo="https://dvdh7g0f0hwck.cloudfront.net/assets/images/channel/GoldminesMovies_Transparent_9b7db248-999e-4200-a459-6cc594650f3d.png" group-title="Indian Movies",Goldmines Movies
 https://ireentv.pages.dev/Goldmines_Movies.m3u8
-
-#EXTINF:-1 tvg-id="Example_M3U_1_247_aHR0cHM6" tvg-name="Goldmines Movies [Backup 1]" tvg-logo="https://dvdh7g0f0hwck.cloudfront.net/assets/images/channel/GoldminesMovies_Transparent_9b7db248-999e-4200-a459-6cc594650f3d.png" group-title="Indian Movies",Goldmines Movies [Backup 1]
-https://ireentv.pages.dev/Goldmines_Movies_Backup_1.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_249_aHR0cHM6" tvg-name="Hindi Movies Server 2" tvg-logo="https://www.google.com/s2/favicons?domain=bozztv.com&sz=256" group-title="Indian Movies",Hindi Movies Server 2
 https://ireentv.pages.dev/Hindi_Movies_Server_2.m3u8
@@ -2110,6 +2086,12 @@ https://ireentv.pages.dev/Shemaroo_Josh.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_263_aHR0cDov" tvg-name="Sony Max" tvg-logo="https://i.postimg.cc/YS3BdNNW/20240823_022655.png" group-title="Indian Movies",Sony Max
 https://ireentv.pages.dev/Sony_Max.m3u8
 
+#EXTINF:-1 tvg-id="Example_M3U_1_264_aHR0cDov" tvg-name="Sony Max [Backup 1]" tvg-logo="https://i.postimg.cc/YS3BdNNW/20240823_022655.png" group-title="Indian Movies",Sony Max [Backup 1]
+https://ireentv.pages.dev/Sony_Max_Backup_1.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_266_aHR0cDov" tvg-name="Sony Max [Backup 3]" tvg-logo="https://i.postimg.cc/YS3BdNNW/20240823_022655.png" group-title="Indian Movies",Sony Max [Backup 3]
+https://ireentv.pages.dev/Sony_Max_Backup_3.m3u8
+
 #EXTINF:-1 tvg-id="Example_M3U_1_267_aHR0cHM6" tvg-name="Sony Max [Backup 4]" tvg-logo="https://i.postimg.cc/YS3BdNNW/20240823_022655.png" group-title="Indian Movies",Sony Max [Backup 4]
 https://ireentv.pages.dev/Sony_Max_Backup_4.m3u8
 
@@ -2121,6 +2103,9 @@ https://ireentv.pages.dev/Sony_Max_2_Backup_1.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_270_aHR0cDov" tvg-name="Sony Max 2 [US]" tvg-logo="https://i.postimg.cc/hP59QSrm/20240825_075205.png" group-title="Indian Movies",Sony Max 2 [US]
 https://ireentv.pages.dev/Sony_Max_2_US.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_271_aHR0cDov" tvg-name="Sony WAH" tvg-logo="https://dtil.tmsimg.com/assets/s157974_ld_h15_aa.png?lock=720x540" group-title="Indian Movies",Sony WAH
+https://ireentv.pages.dev/Sony_WAH.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_272_aHR0cHM6" tvg-name="South Movies" tvg-logo="https://www.google.com/s2/favicons?domain=bozztv.com&sz=256" group-title="Indian Movies",South Movies
 https://ireentv.pages.dev/South_Movies.m3u8
@@ -2260,11 +2245,23 @@ https://ireentv.pages.dev/Amrita_TV.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_346_aHR0cHM6" tvg-name="Anand TV" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Anand_TV.png" group-title="Indian Entertainment",Anand TV
 https://ireentv.pages.dev/Anand_TV.m3u8
 
+#EXTINF:-1 tvg-id="Example_M3U_1_349_aHR0cDov" tvg-name="Colors [Backup 1]" tvg-logo="https://i.postimg.cc/F1t6r1gv/20240823_023247.png" group-title="Indian Entertainment",Colors [Backup 1]
+https://ireentv.pages.dev/Colors_Backup_1.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_350_aHR0cDov" tvg-name="Colors Bangla Cinema" tvg-logo="https://dtil.tmsimg.com/assets/s142748_ld_h15_aa.png?lock=720x540" group-title="Indian Entertainment",Colors Bangla Cinema
+https://ireentv.pages.dev/Colors_Bangla_Cinema.m3u8
+
 #EXTINF:-1 tvg-id="Example_M3U_1_351_aHR0cDov" tvg-name="Colors Bangla HD" tvg-logo="https://i.postimg.cc/3w6F5VZ5/20240822-231514.png" group-title="Indian Entertainment",Colors Bangla HD
 https://ireentv.pages.dev/Colors_Bangla_HD.m3u8
 
+#EXTINF:-1 tvg-id="Example_M3U_1_353_aHR0cDov" tvg-name="Colors Cineplex Bollywood" tvg-logo="https://i.imgur.com/EbHSQAJ.png" group-title="Indian Entertainment",Colors Cineplex Bollywood
+https://ireentv.pages.dev/Colors_Cineplex_Bollywood.m3u8
+
 #EXTINF:-1 tvg-id="Example_M3U_1_354_aHR0cDov" tvg-name="Colors Cineplex Bollywood [Backup 1]" tvg-logo="https://i.imgur.com/EbHSQAJ.png" group-title="Indian Entertainment",Colors Cineplex Bollywood [Backup 1]
 https://ireentv.pages.dev/Colors_Cineplex_Bollywood_Backup_1.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_355_aHR0cDov" tvg-name="Colors Cineplex Superhit" tvg-logo="https://i.imgur.com/79g2kMA.png" group-title="Indian Entertainment",Colors Cineplex Superhit
+https://ireentv.pages.dev/Colors_Cineplex_Superhit.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_357_aHR0cHM6" tvg-name="Colors Rishtey Americas" tvg-logo="https://i.imgur.com/xkOunuW.png" group-title="Indian Entertainment",Colors Rishtey Americas
 https://ireentv.pages.dev/Colors_Rishtey_Americas.m3u8
@@ -2274,9 +2271,6 @@ https://ireentv.pages.dev/Dangal.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_362_aHR0cHM6" tvg-name="Flowers US" tvg-logo="https://jiotvimages.cdn.jio.com/dare_images/images/Sun_TV.png" group-title="Indian Entertainment",Flowers US
 https://ireentv.pages.dev/Flowers_US.m3u8
-
-#EXTINF:-1 tvg-id="Example_M3U_1_366_aHR0cHM6" tvg-name="HUM TV [Backup 2]" tvg-logo="https://i.postimg.cc/vT4DKmf3/20240925_075103.png" group-title="Indian Entertainment",HUM TV [Backup 2]
-https://ireentv.pages.dev/HUM_TV_Backup_2.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_367_aHR0cHM6" tvg-name="Kairali TV" tvg-logo="https://dtil.tmsimg.com/assets/s143247_ld_h15_aa.png?lock=720x540" group-title="Indian Entertainment",Kairali TV
 https://ireentv.pages.dev/Kairali_TV.m3u8
@@ -2304,6 +2298,9 @@ https://ireentv.pages.dev/Sony_Entertainment_TV_Server_4.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_377_aHR0cDov" tvg-name="Sony Entertainment TV Server 5" tvg-logo="" group-title="General",Sony Entertainment TV Server 5
 https://ireentv.pages.dev/Sony_Entertainment_TV_Server_5.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_378_aHR0cDov" tvg-name="Sony SAB Server 3" tvg-logo="https://i.postimg.cc/Gpz6FLrP/20240823_023114.png" group-title="Indian Entertainment",Sony SAB Server 3
+https://ireentv.pages.dev/Sony_SAB_Server_3.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_379_aHR0cDov" tvg-name="Sony SAB [Backup 1]" tvg-logo="https://i.postimg.cc/Gpz6FLrP/20240823_023114.png" group-title="Indian Entertainment",Sony SAB [Backup 1]
 https://ireentv.pages.dev/Sony_SAB_Backup_1.m3u8
@@ -2392,6 +2389,9 @@ https://ireentv.pages.dev/K_Cine.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_421_aHR0cHM6" tvg-name="LoL TV" tvg-logo="https://yt3.googleusercontent.com/wfugK-_Y4Hr89XKEAOEi2wiK8sRfqz4xvj2B_N7xEcFyiuBmcrM7519oFOnyM7aUpnXUyi5t-w=s72-c-k-c0x00ffffff-no-rj" group-title="International Movies",LoL TV
 https://ireentv.pages.dev/LoL_TV.m3u8
 
+#EXTINF:-1 tvg-id="Example_M3U_1_423_aHR0cDov" tvg-name="MAX 1" tvg-logo="https://i.imgur.com/79g2kMA.png" group-title="International Movies",MAX 1
+https://ireentv.pages.dev/MAX_1.m3u8
+
 #EXTINF:-1 tvg-id="Example_M3U_1_424_aHR0cDov" tvg-name="MNX" tvg-logo="https://dtil.tmsimg.com/assets/s143549_ld_h15_aa.png?lock=720x540" group-title="International Movies",MNX
 https://ireentv.pages.dev/MNX.m3u8
 
@@ -2427,6 +2427,9 @@ https://ireentv.pages.dev/ROMEDY_NOW.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_439_aHR0cHM6" tvg-name="SL1" tvg-logo="https://buddytv.netlify.app/img/no-logo.png" group-title="International Movies",SL1
 https://ireentv.pages.dev/SL1.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_440_aHR0cDov" tvg-name="Sony Pix" tvg-logo="https://dtil.tmsimg.com/assets/s143803_ld_h15_aa.png?lock=720x540" group-title="International Movies",Sony Pix
+https://ireentv.pages.dev/Sony_Pix.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_441_aHR0cHM6" tvg-name="Sparkle Movies" tvg-logo="https://tvpnlogopeu.samsungcloud.tv/platform/image/sourcelogo/vc/00/02/34/GBAJ400042T1_20250107T025804SQUARE.png" group-title="International Movies",Sparkle Movies
 https://ireentv.pages.dev/Sparkle_Movies.m3u8
@@ -2608,6 +2611,9 @@ https://ireentv.pages.dev/Animal_Planet_Backup_2.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_508_aHR0cDov" tvg-name="Animal Planet HD" tvg-logo="https://i.postimg.cc/43NXkFx5/20240823_023458.png" group-title="Documentary & Wildlife",Animal Planet HD
 https://ireentv.pages.dev/Animal_Planet_HD.m3u8
 
+#EXTINF:-1 tvg-id="Example_M3U_1_509_aHR0cDov" tvg-name="BBC Earth Server 3" tvg-logo="https://bbcearth.ca/wp-content/uploads/2024/02/BBCEarth_Logo-1.png" group-title="Documentary & Wildlife",BBC Earth Server 3
+https://ireentv.pages.dev/BBC_Earth_Server_3.m3u8
+
 #EXTINF:-1 tvg-id="Example_M3U_1_510_aHR0cHM6" tvg-name="BBC Earth [Backup 1]" tvg-logo="https://bbcearth.ca/wp-content/uploads/2024/02/BBCEarth_Logo-1.png" group-title="Documentary & Wildlife",BBC Earth [Backup 1]
 https://ireentv.pages.dev/BBC_Earth_Backup_1.m3u8
 
@@ -2701,11 +2707,11 @@ https://ireentv.pages.dev/Gopal_Bhar_TV.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_561_aHR0cDov" tvg-name="Minimax" tvg-logo="https://i.imgur.com/WWOlm1x.png" group-title="Kids",Minimax
 https://ireentv.pages.dev/Minimax.m3u8
 
-#EXTINF:-1 tvg-id="Example_M3U_1_563_aHR0cHM6" tvg-name="Motu Patlu" tvg-logo="https://i.imgur.com/ciTJrnl.png" group-title="Kids",Motu Patlu
-https://ireentv.pages.dev/Motu_Patlu.m3u8
-
 #EXTINF:-1 tvg-id="Example_M3U_1_565_aHR0cHM6" tvg-name="Mr Bean Animated [Backup 1]" tvg-logo="https://static.wikia.nocookie.net/logopedia/images/2/25/Mr._Bean_Animated_Series_stacked_logo.png" group-title="Kids",Mr Bean Animated [Backup 1]
 https://ireentv.pages.dev/Mr_Bean_Animated_Backup_1.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_566_aHR0cDov" tvg-name="Nick Bangla Server 3" tvg-logo="https://i.postimg.cc/GtzBrs18/20240823_021125.png" group-title="Kids",Nick Bangla Server 3
+https://ireentv.pages.dev/Nick_Bangla_Server_3.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_567_aHR0cDov" tvg-name="Nick Jr." tvg-logo="https://dtil.tmsimg.com/assets/GNLZZGG002YJ9M2.png?lock=720x540" group-title="Kids",Nick Jr.
 https://ireentv.pages.dev/Nick_Jr.m3u8
@@ -2784,6 +2790,12 @@ https://ireentv.pages.dev/Deen_TV_576p.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_606_aHR0cHM6" tvg-name="Dua Channel" tvg-logo="https://raw.githubusercontent.com/zuhairabs/shiachannel/main/livetv/img/channels/dua-channel.jpg" group-title="Religious",Dua Channel
 https://ireentv.pages.dev/Dua_Channel.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_609_aHR0cDov" tvg-name="IBN TV" tvg-logo="https://i.imgur.com/hkV51ij.png" group-title="Religious",IBN TV
+https://ireentv.pages.dev/IBN_TV.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_610_aHR0cDov" tvg-name="IBN TV Africa" tvg-logo="https://i.imgur.com/eKy2ocd.png" group-title="Religious",IBN TV Africa
+https://ireentv.pages.dev/IBN_TV_Africa.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_611_aHR0cHM6" tvg-name="iON TV UK" tvg-logo="https://i.imgur.com/E8VwnK7.png" group-title="Religious",iON TV UK
 https://ireentv.pages.dev/iON_TV_UK.m3u8
@@ -2926,6 +2938,9 @@ https://ireentv.pages.dev/NHL_Network.m3u8
 #EXTINF:-1 tvg-id="Example_M3U_1_686_aHR0cHM6" tvg-name="Oman Sports TV" tvg-logo="https://s3.aynaott.com/storage/33f87783637fc95fdb8837ba9344c9e9" group-title="Sports",Oman Sports TV
 https://ireentv.pages.dev/Oman_Sports_TV.m3u8
 
+#EXTINF:-1 tvg-id="Example_M3U_1_689_aHR0cHM6" tvg-name="PTV Sports Server 6" tvg-logo="https://i.imgur.com/CPm6GHA.png" group-title="Sports",PTV Sports Server 6
+https://ireentv.pages.dev/PTV_Sports_Server_6.m3u8
+
 #EXTINF:-1 tvg-id="Example_M3U_1_692_aHR0cDov" tvg-name="Sky Sport Bundesliga 1 HD" tvg-logo="https://i.ibb.co.com/C53q8BDh/1.png" group-title="Sports",Sky Sport Bundesliga 1 HD
 https://ireentv.pages.dev/Sky_Sport_Bundesliga_1_HD.m3u8
 
@@ -2970,6 +2985,18 @@ https://ireentv.pages.dev/SKY_SPORTS_PREMIER_LEAGUE_Backup_1.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_709_aHR0cDov" tvg-name="SKY SPORTS PREMIER LEAGUE [Backup 2]" tvg-logo="https://i.ibb.co.com/0R2YXqLk/sky-sports.jpg" group-title="Sports",SKY SPORTS PREMIER LEAGUE [Backup 2]
 https://ireentv.pages.dev/SKY_SPORTS_PREMIER_LEAGUE_Backup_2.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_711_aHR0cDov" tvg-name="SONY LIV 1" tvg-logo="https://ui-avatars.com/api/?name=SONY%20LIV%201&background=17324d&color=ffffff&size=256&length=3&format=png" group-title="Sports",SONY LIV 1
+https://ireentv.pages.dev/SONY_LIV_1.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_712_aHR0cDov" tvg-name="SONY LIV 2" tvg-logo="https://ui-avatars.com/api/?name=SONY%20LIV%202&background=17324d&color=ffffff&size=256&length=3&format=png" group-title="Sports",SONY LIV 2
+https://ireentv.pages.dev/SONY_LIV_2.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_713_aHR0cDov" tvg-name="SONY LIV 3" tvg-logo="https://ui-avatars.com/api/?name=SONY%20LIV%203&background=17324d&color=ffffff&size=256&length=3&format=png" group-title="Sports",SONY LIV 3
+https://ireentv.pages.dev/SONY_LIV_3.m3u8
+
+#EXTINF:-1 tvg-id="Example_M3U_1_714_aHR0cDov" tvg-name="SONY LIV 5" tvg-logo="https://ui-avatars.com/api/?name=SONY%20LIV%205&background=17324d&color=ffffff&size=256&length=3&format=png" group-title="Sports",SONY LIV 5
+https://ireentv.pages.dev/SONY_LIV_5.m3u8
 
 #EXTINF:-1 tvg-id="Example_M3U_1_715_aHR0cHM6" tvg-name="Sony Ten 1" tvg-logo="https://i.postimg.cc/65fsWLS1/20240823_024136.png" group-title="Sports",Sony Ten 1
 https://ireentv.pages.dev/Sony_Ten_1.m3u8

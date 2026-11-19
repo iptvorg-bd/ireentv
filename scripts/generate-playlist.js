@@ -9,8 +9,8 @@ import path from "path";
 const BASE_URL = process.env.PLAYLIST_BASE_URL || "https://ireentv.pages.dev";
 
 const sources = [
-  "https://raw.githubusercontent.com/Romancecity/channel-filter/refs/heads/main/working_playlist.m3u",
-  "https://raw.githubusercontent.com/Romancecity/channel-filter/main/working_playlist.m3u"
+  "#",
+  "#"
 ];
 
 function cleanSlug(name) {

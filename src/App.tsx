@@ -174,7 +174,7 @@ export default function App() {
       // Tier 2: Direct Raw GitHub endpoint for working_playlist.m3u
       if (!data) {
         try {
-          const res = await fetch("https://raw.githubusercontent.com/Romancecity/channel-filter/refs/heads/main/working_playlist.m3u");
+          const res = await fetch("#");
           if (res.ok) {
             const text = await res.text();
             if (text && (text.includes("#EXTINF:") || text.includes("#EXTM3U"))) {
@@ -192,7 +192,7 @@ export default function App() {
       // Tier 3: Direct Raw GitHub fallback branch
       if (!data) {
         try {
-          const fallbackUrl = "https://raw.githubusercontent.com/Romancecity/channel-filter/main/working_playlist.m3u";
+          const fallbackUrl = "#";
           const res = await fetch(fallbackUrl);
           if (res.ok) {
             const text = await res.text();

@@ -81,8 +81,8 @@ export const onRequest = async (context: any): Promise<Response> => {
 
   try {
     const githubSources = [
-      "https://raw.githubusercontent.com/Romancecity/channel-filter/refs/heads/main/working_playlist.m3u",
-      "https://raw.githubusercontent.com/Romancecity/channel-filter/main/working_playlist.m3u"
+      "#",
+      "#"
     ];
 
     let channels: ChannelItem[] = [];
